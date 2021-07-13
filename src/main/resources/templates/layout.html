@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<head>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bf_estiloSistema.css}">
+  <script type="text/javascript" th:src="@{/js/script.js}"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueFood</title>
+</head>
+
+<body>
+<header>
+  <div class="divLogoTipoSistema">
+    <span></span>
+    <a th:href="@{/}">
+      <img th:src="@{/images/bf_logotipoSistema.png}" alt="">
+    </a>
+  </div>
+</header>
+<br><br>
+<!-- Cabeçalho - fim -->
+
+<div layout:fragment="content"></div>
+
+<!--Rodapé - Inicio-->
+</body>
+
+</html>
