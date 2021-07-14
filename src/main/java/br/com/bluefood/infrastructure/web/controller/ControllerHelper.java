@@ -7,5 +7,4 @@ public class ControllerHelper {
     public static void setEditMode(Model model, boolean isEdit){
         model.addAttribute("editMode", isEdit);
     }
-
 }

@@ -3,6 +3,7 @@ package br.com.bluefood.infrastructure.web.controller;
 import br.com.bluefood.application.ClienteService;
 import br.com.bluefood.application.ValidationException;
 import br.com.bluefood.domain.cliente.Cliente;
+import br.com.bluefood.domain.restaurante.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,17 @@ public class PublicController {
 
         ControllerHelper.setEditMode(model, false);
         return "cliente-cadastro";
+    }
+
+    @GetMapping("/restaurante/new")
+    public String newRestaurante(Model model) {
+
+        Restaurante restaurante = new Restaurante();
+        model.addAttribute("restaurante", restaurante);
+        // model.addAttribute("cliente", new Cliente());
+
+        ControllerHelper.setEditMode(model, false);
+        return "restaurante-cadastro";
     }
 
     @PostMapping(path = "/cliente/save")
