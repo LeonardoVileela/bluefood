@@ -10,43 +10,103 @@
 		<div>
 			<h1>Cadastro de Restaurante</h1>
 
-			<form method="post" action="">
+			<div class="mensagemDeSucesso" th:if="${msg != null}">
+				<span class="spanSucesso"></span>
+				<span th:text="${msg}" class="textSucesso"></span>
+			</div><br>
+
+			<form th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" method="POST" th:object="${restaurante}">
 				<fieldset>
+
+					<input type="hidden" id="id" name="id" th:field="*{id}">
+
 					<label for="nome">Nome do Restaurante: </label><br>
-					<input type="text" id="nome" name="nome" placeholder="Nome..."><br><br>
+					<input th:classappend="${#fields.hasErrors('nome')} ? 'inputError' : ''" th:field="*{nome}"  type="text" id="nome" name="nome" placeholder="Nome..."><br><br>
+
+					<div th:if="${#fields.hasErrors('nome')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{nome}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('nome')}">
 
 					<label for="cnpj">CNPJ: </label><br>
-					<input type="text" id="cnpj" name="cnpj" placeholder="CNPJ..."><br><br>
+					<input th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : ''" th:field="*{cnpj}"  type="text" id="cnpj" name="cnpj" placeholder="CNPJ..."><br><br>
+
+					<div th:if="${#fields.hasErrors('cnpj')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{cnpj}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('cnpj')}">
 
 					<label for="email">E-mail: </label><br>
-					<input type="text" id="email" name="email" placeholder="E-mail..."><br><br>
+					<input th:classappend="${#fields.hasErrors('email')} ? 'inputError' : ''" th:field="*{email}"  type="text" id="email" name="email" placeholder="E-mail..."><br><br>
+
+					<div th:if="${#fields.hasErrors('email')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{email}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('email')}">
 
 					<label for="telefone">Telefone: </label><br>
-					<input type="text" id="telefone" name="telefone" placeholder="Telefone..."><br><br>
+					<input th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''" th:field="*{telefone}"  type="text" id="telefone" name="telefone" placeholder="Telefone..."><br><br>
 
-					<label for="cep">CEP: </label><br>
-					<input type="text" id="cep" name="cep" placeholder="CEP..."><br><br>
+					<div th:if="${#fields.hasErrors('telefone')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{telefone}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('telefone')}">
+
+					<label for="taxaEntrega">Taxa de entrega: </label><br>
+					<input type="text" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de Entrega..." th:field="*{taxaEntrega}" th:classappend="${#fields.hasErrors('taxaEntrega')} ? 'inputError' : ''" /><br>
+
+					<div th:if="${#fields.hasErrors('taxaEntrega')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{taxaEntrega}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('taxaEntrega')}">
+
+					<label for="tempoEntregaBase">Tempo de entrega (mín.): </label><br />
+					<input type="text" id="tempoEntregaBase" name="tempoEntregaBase" placeholder="Tempo de Entrega..." th:field="*{tempoEntregaBase}" th:classappend="${#fields.hasErrors('tempoEntregaBase')} ? 'inputError' : ''" /><br>
+
+					<div th:if="${#fields.hasErrors('tempoEntregaBase')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{tempoEntregaBase}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('tempoEntregaBase')}">
+
 
 					<label for="categoria">Categoria de comida: </label><br>
-					<select name="categoria" id="categoria">
-						<option>Salada</option>
-						<option>Churrasco</option>
-						<option>Pizza</option>
-						<option>Hamburguer</option>
+					<select th:classappend="${#fields.hasErrors('categorias')} ? 'inputError' : ''" multiple="multiple" th:field="*{categorias}"  name="categoria" id="categoria" style="height: 100px">
+						<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}"></option>
 					</select><br><br>
 
+					<div th:if="${#fields.hasErrors('categorias')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{categorias}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('categorias')}">
+
 					<label for="logotipo">Logotipo: </label><br>
-					<input type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
+					<input th:classappend="${#fields.hasErrors('logotipo')} ? 'inputError' : ''" th:field="*{logotipo}"  type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
+
+					<div th:if="${#fields.hasErrors('logotipo')}" class="mensagemDeErro">
+						<span class="spanError"></span>
+						<span th:errors="*{logotipo}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('logotipo')}">
 
 					<label for="senha">Senha: </label><br>
-					<input type="password" id="senha" name="senha" placeholder="Senha..."><br><br>
+					<input th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''" th:field="*{senha}" type="password" id="senha" name="senha" placeholder="Senha..."><br><br>
 
-					<div class="mensagemDeErro">
+					<div th:if="${#fields.hasErrors('senha')}" class="mensagemDeErro">
 						<span class="spanError"></span>
-						<span class="textError"> Aqui vai um exemplo de mensagem</span>
-					</div><br>
+						<span th:errors="*{senha}" class="textError"></span>
+					</div>
+					<br th:if="${#fields.hasErrors('senha')}">
 
-					<input type="button" value="Cadastrar">
+					<input type="hidden" name="senha" value="#" th:if="${editMode}">
+
+					<input type="submit" th:value="${editMode} ? 'Alterar' : 'Cadastrar'">
 				</fieldset>
 			</form>
 			<br>

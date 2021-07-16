@@ -4,6 +4,7 @@ import br.com.bluefood.domain.usuario.Usuario;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -19,8 +20,8 @@ import java.util.Set;
 public class Restaurante extends Usuario {
 
     @NotBlank(message = "O CNPJ não pode ser vazio")
-    @Pattern(regexp = "[0-9]{14}", message = "O CPF possui formato inválido")
-    @Column(length = 11, nullable = false) //tamanho do campo no banco
+    @Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inválido")
+    @Column(length = 14, nullable = false) //tamanho do campo no banco
     private String cnpj;
 
     @Size(max = 80)
@@ -41,6 +42,8 @@ public class Restaurante extends Usuario {
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_restaurante_id")
     ) //faço a configuração do muitos pra muitos, de um lado não preciso fazer do outro
+    @Size(min = 1, message = "O Restaurante precisa ter pelo menos uma categoria")
+    @ToString.Exclude //marcação IMPORTANTEEE Lombok buga o to String em atributos que tem relacionamento, sempre colocar essa marcação
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
 }

@@ -19,7 +19,7 @@ public class InsereCategorias {
     public void onApplicationEvent(ContextRefreshedEvent event) {
         CategoriaRestaurante categoriaRestaurante = new CategoriaRestaurante("Pizza", "0001-categoria.png");
         CategoriaRestaurante categoriaRestaurante2 = new CategoriaRestaurante("Sanduíche", "0002-categoria.png");
-        CategoriaRestaurante categoriaRestaurante3 = new CategoriaRestaurante("'Churrasco'", "0003-categoria.png");
+        CategoriaRestaurante categoriaRestaurante3 = new CategoriaRestaurante("Churrasco", "0003-categoria.png");
         CategoriaRestaurante categoriaRestaurante4 = new CategoriaRestaurante("Salada", "0004-categoria.png");
         CategoriaRestaurante categoriaRestaurante5 = new CategoriaRestaurante("Sobremesa", "0005-categoria.png");
         CategoriaRestaurante categoriaRestaurante6 = new CategoriaRestaurante("Japonês", "0006-categoria.png");

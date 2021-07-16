@@ -18,6 +18,17 @@ public class RestauranteService {
             throw new ValidationException("O e-mail está duplicado");
         }
 
+        //se cliente for uma edição ele vai buscar pelo id pegar a senha do banco e colocar
+        //se for criação ele faz a criptografia da senha
+        if (restaurante.getEmail() == null){
+            //orElseThrow retorna o cliente, se não retornar nada ele lança uma exeption
+            //Optional retorna algo ou Null
+            Restaurante restauranteDB = restauranteRepository.findById(restaurante.getId()).orElseThrow();
+
+            restaurante.setSenha(restauranteDB.getSenha());
+        }else {
+            restaurante.encryptPassword();
+        }
 
         restauranteRepository.save(restaurante);
     }
