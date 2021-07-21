@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -27,6 +28,8 @@ public class Restaurante extends Usuario {
     @Size(max = 80)
     private String logotipo;
 
+    private transient MultipartFile logotipoFile;
+
     @NotNull(message = "A taxa de entrega não pode ser vazia")
     @Max(99)
     @Min(0)
@@ -46,4 +49,14 @@ public class Restaurante extends Usuario {
     @ToString.Exclude //marcação IMPORTANTEEE Lombok buga o to String em atributos que tem relacionamento, sempre colocar essa marcação
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
+
+    public void setLogotipoFileName() {
+        if(getId() == null){
+            throw new IllegalStateException("é preciso primeiro gravar o registro");
+        }
+
+        //TODO trocar forma de ler a extensão
+        this.logotipo = String.format("%04d-logo.%s", getId(),".png");
+
+    }
 }

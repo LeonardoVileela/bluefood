@@ -28,9 +28,13 @@ public class RestauranteService {
             restaurante.setSenha(restauranteDB.getSenha());
         }else {
             restaurante.encryptPassword();
+            restaurante = restauranteRepository.save(restaurante);
+            //adiciona nome do arquivo da logo
+            restaurante.setLogotipoFileName();
+            //TODO: Upload!
         }
 
-        restauranteRepository.save(restaurante);
+
     }
 
     //verifica se o email está duplicado

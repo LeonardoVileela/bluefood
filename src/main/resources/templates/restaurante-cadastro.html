@@ -15,7 +15,7 @@
 				<span th:text="${msg}" class="textSucesso"></span>
 			</div><br>
 
-			<form th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" method="POST" th:object="${restaurante}">
+			<form th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" method="POST" th:object="${restaurante}" enctype="multipart/form-data">
 				<fieldset>
 
 					<input type="hidden" id="id" name="id" th:field="*{id}">
@@ -87,7 +87,7 @@
 					<br th:if="${#fields.hasErrors('categorias')}">
 
 					<label for="logotipo">Logotipo: </label><br>
-					<input th:classappend="${#fields.hasErrors('logotipo')} ? 'inputError' : ''" th:field="*{logotipo}"  type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
+					<input th:classappend="${#fields.hasErrors('logotipo')} ? 'inputError' : ''" th:field="*{logotipoFile}"  type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
 
 					<div th:if="${#fields.hasErrors('logotipo')}" class="mensagemDeErro">
 						<span class="spanError"></span>
