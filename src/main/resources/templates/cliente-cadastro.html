@@ -14,7 +14,7 @@
                 <span class="spanSucesso"></span>
                 <span th:text="${msg}" class="textSucesso"></span>
             </div><br>
-
+            <iframe name="votar" style="display:none;"></iframe>
             <form th:action="${editMode} ? @{/cliente/save} : @{/public/cliente/save}" method="POST" th:object="${cliente}">
                 <fieldset>
 
@@ -91,9 +91,18 @@
 
             <input type="button" value="Voltar">
 
+
+
+
+
         </div>
 
     </div>
+
+    <script>
+
+    </script>
+
 </body>
 
 </html>

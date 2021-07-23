@@ -11,6 +11,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
+bluefood:
+  files:
+    logotipo: C:/Users/Leonardo/Documents/images
 
 
 

@@ -5,11 +5,87 @@
 
 <head>
   <link rel="stylesheet" type="text/css" th:href="@{/css/bf_estiloSistema.css}">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
   <script type="text/javascript" th:src="@{/js/script.js}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BlueFood</title>
+
+  <script>
+   /* $(document).ready(function()
+    {
+      function refresh(id)
+      {
+        /*var div = ('#target-div'),
+                divHtml = div.html();
+
+        div.html(divHtml);*/
+        // Código para pegar url do navegador
+        /*var url = (window.location != window.parent.location)
+                ? document.referrer
+                : document.location.href;
+
+
+
+        $( "#doce" ).remove()
+        $( "#teste" ).append( '<div id="doce" class="mensagemDeSucesso">' +
+                '<span class="spanSucesso"></span>' +
+                '<span style="color: black">' + url + ' nice</span>'+
+                '<br> </div>');
+
+
+
+
+      }
+
+      setInterval(function()
+      {
+        var url = "https://makeup-api.herokuapp.com/api/v1/products.json?product_tags=Gluten+Free&product_type=blush";
+
+        $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json', // added data type
+          success: function(res) {
+
+            function shuffle(array) {
+              var currentIndex = array.length,  randomIndex;
+
+              // While there remain elements to shuffle...
+              while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                  array[randomIndex], array[currentIndex]];
+              }
+
+              return array;
+            }
+
+            shuffle(res);
+
+            res.map(x =>
+                    refresh(x.id)
+            )
+          }
+        });
+
+
+      }, 1000); //300000 is 5minutes in ms
+    }) */
+  </script>
+  <script>
+
+  </script>
 </head>
 
 <body>

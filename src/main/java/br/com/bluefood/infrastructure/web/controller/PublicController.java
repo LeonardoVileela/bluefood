@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Random;
 
 @Controller
 @RequestMapping(path = "/public")
@@ -54,6 +55,7 @@ public class PublicController {
         ControllerHelper.setEditMode(model, false);
         return "restaurante-cadastro";
     }
+
 
     @PostMapping(path = "/restaurante/save")
     public String saveRestaurante(

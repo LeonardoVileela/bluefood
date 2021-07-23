@@ -11,6 +11,10 @@ public class RestauranteService {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
+    //injeção de dependencias de imagem service
+    @Autowired
+    private ImageService imageService;
+
     public void save(Restaurante restaurante) throws ValidationException{
 
         //chama o método pra verificar se o email está duplicado
@@ -28,10 +32,14 @@ public class RestauranteService {
             restaurante.setSenha(restauranteDB.getSenha());
         }else {
             restaurante.encryptPassword();
-            restaurante = restauranteRepository.save(restaurante);
+            restauranteRepository.save(restaurante);
             //adiciona nome do arquivo da logo
-            restaurante.setLogotipoFileName();
-            //TODO: Upload!
+            String logotipoName = restaurante.setLogotipoFileName();
+            restaurante.setLogotipo(logotipoName);
+            System.out.println(logotipoName);
+            //faz o upload do arquivo
+            imageService.uploadLogotipo(restaurante.getLogotipoFile(),restaurante.getLogotipo());
+            restauranteRepository.save(restaurante);
         }
 
 

@@ -1,6 +1,7 @@
 package br.com.bluefood.domain.restaurante;
 
 import br.com.bluefood.domain.usuario.Usuario;
+import br.com.bluefood.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,13 +51,13 @@ public class Restaurante extends Usuario {
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
 
-    public void setLogotipoFileName() {
+    public String setLogotipoFileName() {
         if(getId() == null){
             throw new IllegalStateException("é preciso primeiro gravar o registro");
         }
 
-        //TODO trocar forma de ler a extensão
-        this.logotipo = String.format("%04d-logo.%s", getId(),".png");
+
+        return String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
 
     }
 }
