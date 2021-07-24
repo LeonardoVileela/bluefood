@@ -10,10 +10,11 @@
 		<div>
 			<h1>Cadastro de Restaurante</h1>
 
-			<div class="mensagemDeSucesso" th:if="${msg != null}">
-				<span class="spanSucesso"></span>
-				<span th:text="${msg}" class="textSucesso"></span>
-			</div><br>
+			<div id="sucesso">
+
+			</div>
+
+
 
 			<form th:action="${editMode} ? @{/restaurante/save} : @{/public/restaurante/save}" method="POST" th:object="${restaurante}" enctype="multipart/form-data">
 				<fieldset>
@@ -89,11 +90,11 @@
 					<label for="logotipo">Logotipo: </label><br>
 					<input th:classappend="${#fields.hasErrors('logotipo')} ? 'inputError' : ''" th:field="*{logotipoFile}"  type="file" id="logotipo" name="logotipo" placeholder="Selecionar..."><br><br>
 
-					<div th:if="${#fields.hasErrors('logotipo')}" class="mensagemDeErro">
+					<div th:if="${#fields.hasErrors('logotipoFile')}" class="mensagemDeErro">
 						<span class="spanError"></span>
-						<span th:errors="*{logotipo}" class="textError"></span>
+						<span th:errors="*{logotipoFile}" class="textError"></span>
 					</div>
-					<br th:if="${#fields.hasErrors('logotipo')}">
+					<br th:if="${#fields.hasErrors('logotipoFile')}">
 
 					<label for="senha">Senha: </label><br>
 					<input th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''" th:field="*{senha}" type="password" id="senha" name="senha" placeholder="Senha..."><br><br>
@@ -110,10 +111,42 @@
 				</fieldset>
 			</form>
 			<br>
+			<!-- é usado \' para poder gerar uma aspa na string já que a sintax usa aspa-->
+			<input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/} + '\';'">
 
-			<input type="button" value="Voltar">
 		</div>
+
+
+
+
+		<script>
+
+			const urlSearchParams = new URLSearchParams(window.location.search);
+			const params = Object.fromEntries(urlSearchParams.entries());
+
+
+			var isTrueSet = (params.cadastroRestaurante === 'true');
+
+			if(isTrueSet){
+
+			console.log(params.cadastroRestaurante)
+				document.getElementById('sucesso').insertAdjacentHTML(
+						'afterbegin',
+						`<div class="mensagemDeSucesso"">
+\t\t\t\t<span class="spanSucesso"></span>
+\t\t\t\t<span class="textSucesso">Restaurante gravado com sucesso</span>
+\t\t\t</div><br>`
+
+
+				)
+
+			}
+		</script>
+
+
 	</div>
+
+
 
 </body>
 

@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // EqualsAndHashCode vão ser gerados somente quando eu deixar explcito
 @Entity
 @Table(name = "categoria_restaurante")
 public class CategoriaRestaurante implements Serializable {
@@ -28,6 +28,7 @@ public class CategoriaRestaurante implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include //Deixo explicito o uso do EqualsAndHashCode
     private Integer id;
 
     @NotBlank

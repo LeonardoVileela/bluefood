@@ -2,8 +2,11 @@ package br.com.bluefood.application;
 
 import br.com.bluefood.domain.cliente.Cliente;
 import br.com.bluefood.domain.cliente.ClienteRepository;
+import br.com.bluefood.domain.restaurante.Restaurante;
+import br.com.bluefood.domain.restaurante.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClienteService {
@@ -11,6 +14,10 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private RestauranteRepository restauranteRepository;
+
+    @Transactional
     public void save(Cliente cliente) throws ValidationException{
 
         //chama o método pra verificar se o email está duplicado
@@ -36,6 +43,12 @@ public class ClienteService {
     //verifica se o email está duplicado
     private boolean validateEmail(String email, Integer id) {
         Cliente cliente = clienteRepository.findByEmail(email);
+
+        Restaurante restaurante = restauranteRepository.findByEmail(email);
+
+        if( restaurante != null ){
+            return false;
+        }
 
         if(cliente != null){
             if(id == null){

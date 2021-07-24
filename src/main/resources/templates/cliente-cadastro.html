@@ -10,10 +10,10 @@
         <div>
             <h1>Cadastro de Cliente</h1>
 
-            <div class="mensagemDeSucesso" th:if="${msg != null}">
-                <span class="spanSucesso"></span>
-                <span th:text="${msg}" class="textSucesso"></span>
-            </div><br>
+            <div id="sucesso">
+
+            </div>
+
             <iframe name="votar" style="display:none;"></iframe>
             <form th:action="${editMode} ? @{/cliente/save} : @{/public/cliente/save}" method="POST" th:object="${cliente}">
                 <fieldset>
@@ -89,7 +89,8 @@
             </form>
             <br>
 
-            <input type="button" value="Voltar">
+
+            <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/} + '\';'">
 
 
 
@@ -97,11 +98,31 @@
 
         </div>
 
+        <script>
+
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const params = Object.fromEntries(urlSearchParams.entries());
+
+            var isTrueSet = (params.cadastroCliente === 'true');
+
+            if(isTrueSet){
+
+                document.getElementById('sucesso').insertAdjacentHTML(
+                    'afterbegin',
+                    `<div class="mensagemDeSucesso"">
+\t\t\t\t<span class="spanSucesso"></span>
+\t\t\t\t<span class="textSucesso">Usuário gravado com sucesso</span>
+\t\t\t</div><br>`
+
+
+                )
+
+            }
+        </script>
+
     </div>
 
-    <script>
 
-    </script>
 
 </body>
 

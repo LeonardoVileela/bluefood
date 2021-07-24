@@ -1,6 +1,7 @@
 package br.com.bluefood.domain.restaurante;
 
 import br.com.bluefood.domain.usuario.Usuario;
+import br.com.bluefood.infrastructure.web.validator.UploadConstraint;
 import br.com.bluefood.util.FileType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Restaurante extends Usuario {
     @Size(max = 80)
     private String logotipo;
 
+    @UploadConstraint(acceptedTypes = {FileType.PNG, FileType.JPG}, message = "Formato de arquivo não aceito")
     private transient MultipartFile logotipoFile;
 
     @NotNull(message = "A taxa de entrega não pode ser vazia")

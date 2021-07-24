@@ -64,12 +64,14 @@ public class PublicController {
             Errors errors,
             Model model
     ) {
-        System.out.println(restaurante);
+        boolean restauranteCadastro = false;
+
         //verifica se deu erro
         if (!errors.hasErrors()) {
             try {
                 restauranteService.save(restaurante);
                 model.addAttribute("msg", "Restaurante gravado com sucesso");
+                restauranteCadastro = true;
             } catch (ValidationException e) {
                 //joga a mensagem de erro pro html
                 errors.rejectValue("email", null, e.getMessage());
@@ -80,7 +82,13 @@ public class PublicController {
         ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
         //verifica se é pra editar ou cadastrar, como estamos no cadastro o valor é "false"
         ControllerHelper.setEditMode(model, false);
+
+        if(restauranteCadastro){
+            return "redirect:/public/restaurante/new" + "?cadastroRestaurante=true";
+        }
+
         return "restaurante-cadastro";
+
     }
 
 
@@ -92,11 +100,13 @@ public class PublicController {
             Model model
     ) {
 
+        boolean clienteCadastro = false;
         //verifica se deu erro
         if (!errors.hasErrors()) {
             try {
                 clienteService.save(cliente);
                 model.addAttribute("msg", "Cliente gravado com sucesso");
+                clienteCadastro = true;
             } catch (ValidationException e) {
                 //joga a mensagem de erro pro html
                 errors.rejectValue("email", null, e.getMessage());
@@ -106,6 +116,12 @@ public class PublicController {
 
         //verifica se é pra editar ou cadastrar, como estamos no cadastro o valor é "false"
         ControllerHelper.setEditMode(model, false);
+
+
+        if(clienteCadastro){
+            return "redirect:/public/cliente/new" + "?cadastroCliente=true";
+        }
+
         return "cliente-cadastro";
     }
 

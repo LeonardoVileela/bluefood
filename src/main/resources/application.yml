@@ -10,7 +10,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
 bluefood:
   files:
     logotipo: C:/Users/Leonardo/Documents/images
