@@ -11,18 +11,18 @@
             <img id="imgIconeUsuario" th:src="@{/images/bf_iconeUsuario.png}" alt="">
 
             <h1>Autenticação</h1>
-            <form method="POST" action="">
+            <form method="POST" th:action="@{/login}">
                 <fieldset>
-                    <input type="text" name="email" placeholder="E-mail..."><br>
-                    <input type="password" name="senha" placeholder="Senha..."><br>
-                    <input type="button" value="Entrar" name="" id="">
+                    <input type="text" name="username" placeholder="E-mail..."><br>
+                    <input type="password" name="password" placeholder="Senha..."><br>
+                    <input type="submit" value="Entrar" name="" id="">
                 </fieldset>
             </form>
             <br>
 
-            <div class="mensagemDeErro">
+            <div class="mensagemDeErro" th:if="${msg != null}">
                 <span class="spanError"></span>
-                <span class="textError"> Aqui vai um LIXOOOO</span>
+                <span class="textError" th:text="${msg}"></span>
             </div>
             <br>
 
