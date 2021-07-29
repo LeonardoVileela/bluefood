@@ -22,7 +22,7 @@ public class Cliente extends Usuario {
     private String cpf;
 
     @NotBlank(message = "O CPF não pode ser vazio")
-    @Pattern(regexp = "[0-9]{8}", message = "O CPF possui formato inválido") //validação, aceita somente números de 0 a 9 e no maximo 8 digitos
+    @Pattern(regexp = "[0-9]{8}", message = "O CEP possui formato inválido") //validação, aceita somente números de 0 a 9 e no maximo 8 digitos
     @Column(length = 8) //tamanho do campo no banco
     private String cep;
 
