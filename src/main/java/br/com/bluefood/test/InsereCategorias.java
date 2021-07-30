@@ -1,5 +1,7 @@
-package br.com.bluefood.domain.restaurante;
+package br.com.bluefood.test;
 
+import br.com.bluefood.domain.restaurante.CategoriaRestaurante;
+import br.com.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

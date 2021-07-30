@@ -52,6 +52,8 @@ public class Restaurante extends Usuario {
     @ToString.Exclude //marcação IMPORTANTEEE Lombok buga o to String em atributos que tem relacionamento, sempre colocar essa marcação
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
+    @OneToMany(mappedBy = "restaurante") //não precisa de fazer @JoinTable em relacionamento one tomay ou manytoon
+    private Set<ItemCardapio> itemCardapios = new HashSet<>(0);
 
     public String setLogotipoFileName() {
         if(getId() == null){
