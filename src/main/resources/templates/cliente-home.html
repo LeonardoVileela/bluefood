@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{Layout}">
+
+<body>
+
+<div layout:fragment="content">
+    <div>
+
+    <div>
+        <h1>É hora de rangar!</h1>
+        <form action="" method="POST">
+
+            <input id="buscaHome" type="text" name="busca" placeholder="Buscar...">
+            <input type="button" value="Buscar">
+
+        </form>
+    </div>
+
+    <div id="divCategoriasComidaGeral">
+        <div class="divCategoriasComidaOpcao">
+            <a href="#">
+                <img class="imgCategoriaComida" src="images/sys_categoriaChurrasco.png" alt="">
+                <br>
+
+                <span>
+                    Churrasco
+                </span>
+            </a>
+        </div>
+
+
+        <div class="divCategoriasComidaOpcao">
+            <a href="#">
+                <img class="imgCategoriaComida" src="images/sys_categoriaHamburguer.png" alt="">
+                <br>
+
+                <span>
+                    Hamburguer
+                </span>
+            </a>
+        </div>
+
+
+        <div class="divCategoriasComidaOpcao">
+            <a href="#">
+                <img class="imgCategoriaComida" src="images/sys_categoriaPizza.png" alt="">
+                <br>
+
+                <span>
+                    Pizza
+                </span>
+            </a>
+        </div>
+
+        <div class="divCategoriasComidaOpcao">
+            <a href="#">
+                <img class="imgCategoriaComida" src="images/sys_categoriaSalada.png" alt="">
+                <br>
+
+                <span>
+                    Salada
+                </span>
+            </a>
+        </div>
+
+
+        <div class="divCategoriasComidaOpcao">
+            <a href="#">
+                <img class="imgCategoriaComida" src="images/sys_categoriaSobremesa.png" alt="">
+                <br>
+
+                <span>
+                    Sobremesa
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <h1>Cupons Disponíveis</h1>
+        <input type="button" value="10% Hamburguer"><br>
+        <input type="button" value="15% Pizza"><br>
+    </div>
+
+    <div>
+        <h1>Últimos pedidos</h1>
+        <input type="button" value="#15124 McDonalts"><br>
+    </div>
+
+    <div>
+        <h1>Conta</h1>
+        <input type="button" value="Meus Dados" th:onclick="'location.href=\'' + @{/cliente/edit} + '\';'">
+        <input type="button" value="Sair" th:onclick="'location.href=\'' + @{/logout} + '\';'">
+    </div>
+
+
+
+
+    </div>
+</div>
+</body>
+
+</html>

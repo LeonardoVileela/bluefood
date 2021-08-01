@@ -22,6 +22,7 @@ public class SecurityUtils {
     }
 
     //verifica se cliente está logado
+    //retorna o cliente logado, usar esse método para pegar usuario logado
     public static Cliente loggedCliente() {
         LoggedUser loggedUser = loggedUser();
 
