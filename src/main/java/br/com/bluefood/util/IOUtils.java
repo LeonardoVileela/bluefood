@@ -3,6 +3,7 @@ package br.com.bluefood.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -12,5 +13,10 @@ public class IOUtils {
         //REPLACE_EXISTING se tiver um arquivo com o mesmo nome ele substitui
         Files.copy(in, Paths.get(outputDir,fileName), StandardCopyOption.REPLACE_EXISTING);
 
+    }
+
+    //lê todos os bytes de um arquivo em um diretorio do computador
+    public static byte[] getBytes(Path path) throws IOException {
+        return Files.readAllBytes(path);
     }
 }

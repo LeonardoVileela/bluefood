@@ -4,8 +4,12 @@ import br.com.bluefood.application.ClienteService;
 import br.com.bluefood.application.ValidationException;
 import br.com.bluefood.domain.cliente.Cliente;
 import br.com.bluefood.domain.cliente.ClienteRepository;
+import br.com.bluefood.domain.restaurante.CategoriaRestaurante;
+import br.com.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.bluefood.util.SecurityUtils;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,10 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/cliente")
 public class ClienteController {
+
+    @Autowired
+    private CategoriaRestauranteRepository categoriaRestauranteRepository;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -27,7 +35,10 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping(path = "/home")
-    public String home(){
+    public String home(Model model){
+        List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
+        model.addAttribute("categorias", categorias);
+
         return "cliente-home";
     }
 

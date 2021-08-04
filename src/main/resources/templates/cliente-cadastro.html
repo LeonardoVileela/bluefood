@@ -90,7 +90,7 @@
             <br>
 
 
-            <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/} + '\';'">
+            <input type="button" value="Voltar" th:onclick="${editMode} ? ('location.href=\'' + @{home} + '\';') : 'location.href=\'' + @{/} + '\';'">
 
 
 
