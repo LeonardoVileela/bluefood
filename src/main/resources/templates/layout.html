@@ -92,9 +92,14 @@
 <header>
   <div class="divLogoTipoSistema">
     <span></span>
-    <a th:href="@{/}">
+    <a th:href="${link} == null ? @{/} : ${link}">
       <img th:src="@{/images/bf_logotipoSistema.png}" alt="">
     </a>
+  </div>
+  <div th:if="${#authentication} != null"> <!--Pega informações do usuario logado -->
+    <div id="divUsuarioLogado" th:if="${#authentication.principal} != 'anonymousUser'">
+      <span th:text="'Olá, ' + ${#authentication.principal.usuario.nome} + '!'"></span>
+    </div>
   </div>
 </header>
 <br><br>

@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-devtools'
    // implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' //serve para pegar coisas do usuario logado no próprio thymeleaf
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
