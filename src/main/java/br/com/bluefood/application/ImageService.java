@@ -29,7 +29,7 @@ public class ImageService {
         //usa o metodo estatico de utils para fazer upload
         try {
             IOUtils.copy(multipartFile.getInputStream(), fileName, logotiposDir);
-        } catch (IOException e) {
+        } catch (Exception e) {
             //se o upload der problema lança uma Exception
             throw new ApplicationServiceException(e);
         }

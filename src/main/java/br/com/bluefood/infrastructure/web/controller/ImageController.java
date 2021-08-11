@@ -13,7 +13,7 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @GetMapping(path = "/images/{type}/{imgName}")
+    @GetMapping(path = "/image/{type}/{imgName}")
     @ResponseBody
     public byte[] getBytes(
             @PathVariable("type") String type,

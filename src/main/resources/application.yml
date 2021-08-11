@@ -16,8 +16,8 @@ spring:
       max-request-size: 10MB
 bluefood:
   files:
-    logotipo: C:/Users/Leonardo/Documents/images/logotipo
-    comida: C:/Users/Leonardo/Documents/images/comida
-    categoria: C:/Users/Leonardo/Documents/images/categoria
+    logotipo: src/main/resources/static/image/logotipo
+    comida: src/main/resources/static/image/comida
+    categoria: src/main/resources/static/image/categoria
 
 

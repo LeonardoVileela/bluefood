@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class RestauranteService {
 
@@ -77,5 +79,9 @@ public class RestauranteService {
         }
 
         return true;
+    }
+
+    public List<Restaurante> search(String search){
+        return restauranteRepository.findAll();
     }
 }

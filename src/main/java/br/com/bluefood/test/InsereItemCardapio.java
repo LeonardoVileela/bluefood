@@ -1,4 +1,4 @@
-package br.com.bluefood.test;
+/*package br.com.bluefood.test;
 
 import br.com.bluefood.domain.restaurante.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -52,4 +51,4 @@ public class InsereItemCardapio {
 
     }
 
-}
+}*/

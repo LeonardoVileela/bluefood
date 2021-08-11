@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{Layout}" th:with="link=@{/cliente/home}"> <!-- Manda variavel pra pagina layout -->
+
+<body>
+
+<div layout:fragment="content">
+
+    <div>
+        <h1>É hora de rangar!</h1>
+        <form action="" method="POST">
+
+            <input id="buscaHome" type="text" name="busca" placeholder="Buscar...">
+            <input type="button" value="Buscar">
+
+        </form>
+    </div>
+
+    <div id="divCategoriasComidaGeral">
+
+        <div class="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
+            <a href="#">
+                <img class="imgCategoriaComida" alt="" th:src="@{/image/categoria/} + ${categoria.imagem}">
+                <br>
+
+                <span th:text="${categoria.nome}"></span>
+            </a>
+        </div>
+
+    </div>
+
+    <div>
+        <h1>Resultados</h1>
+        <fieldset>
+            <legend>Filtros</legend>
+            <input type="button" value="Entrega Grátis"><br>
+            <input type="button" value="Maior Preço"> <input type="button" value="Menor Preço"><br>
+            <input type="button" value="Maior Taxa"> <input type="button" value="Menor Taxa"><br>
+            <input type="button" value="Maior Tempo" id="inputSelecionado"> <input type="button"
+                value="Menor Tempo"><br>
+        </fieldset>
+    </div>
+    <br>
+    <div>
+
+        <div th:each="restaurante : ${restaurantes}">
+            <a href="#">
+                <img class="imgRestauranteOpcao"  th:src="@{/image/logotipo/} + ${restaurante.logotipo}">
+                <br>
+                <span class="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span>
+                <br>
+                <span>teste</span>
+                <br>
+                <span th:text="'Tempo médio de entrega: '+ ${restaurante.tempoEntregaBase} + 'm'"></span>
+                <br>
+                <span th:text="'Taxa de entrega: R$  ' + ${restaurante.taxaEntrega}"></span>
+                <br>
+            </a>
+            <br><br>
+        </div>
+        <br><br>
+
+
+
+    </div>
+
+    <input type="button" value="Voltar">
+
+
+</div>
+</body>
+
+</html>

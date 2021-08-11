@@ -11,10 +11,10 @@
 
     <div>
         <h1>É hora de rangar!</h1>
-        <form action="" method="POST">
+        <form th:action="@{/cliente/search}" method="GET">
 
             <input id="buscaHome" type="text" name="busca" placeholder="Buscar...">
-            <input type="button" value="Buscar">
+            <input type="submit" value="Buscar">
 
         </form>
     </div>
@@ -23,7 +23,7 @@
 
         <div class="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
             <a href="#">
-                <img class="imgCategoriaComida" alt="" th:src="@{/images/categoria/} + ${categoria.imagem}">
+                <img class="imgCategoriaComida" alt="" th:src="@{/image/categoria/} + ${categoria.imagem}">
                 <br>
 
                 <span th:text="${categoria.nome}"></span>
