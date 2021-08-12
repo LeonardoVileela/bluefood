@@ -42,7 +42,10 @@ public class Restaurante extends Usuario {
     @Min(0)
     private Integer tempoEntregaBase;
 
-    @ManyToMany
+
+    //JPA QUANDO SAI DO SERVICE, NÃO CARREGA OS DADOS DE ATRIBUTOS ManyToMany
+    //É NECESSARIO USAR "fetch = FetchType.EAGER" PARA FORÇAR O CARREGAMENTO DOS DADOS
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "restaurante_has_categoria",
             joinColumns = @JoinColumn(name = "restaurante_id"),
