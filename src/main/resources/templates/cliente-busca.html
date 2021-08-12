@@ -10,36 +10,44 @@
 
     <div>
         <h1>É hora de rangar!</h1>
-        <form action="" method="POST">
+        <form th:action="@{/cliente/search}" method="GET">
 
             <input id="buscaHome" type="text" name="busca" placeholder="Buscar...">
-            <input type="button" value="Buscar">
+            <input type="submit" value="Buscar">
 
         </form>
+    </div>
+
+    <div th:if="${restaurantes.size() == 0}">
+        <span>Nenhum restaurante Encontrado</span>
     </div>
 
     <div id="divCategoriasComidaGeral">
 
         <div class="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
-            <a href="#">
+            <a th:href="@{/cliente/searchCategory} + '?categoria=' + ${categoria.id}">
                 <img class="imgCategoriaComida" alt="" th:src="@{/image/categoria/} + ${categoria.imagem}">
                 <br>
 
                 <span th:text="${categoria.nome}"></span>
             </a>
         </div>
-
     </div>
+
+
 
     <div>
         <h1>Resultados</h1>
         <fieldset>
             <legend>Filtros</legend>
-            <input type="button" value="Entrega Grátis"><br>
-            <input type="button" value="Maior Preço"> <input type="button" value="Menor Preço"><br>
-            <input type="button" value="Maior Taxa"> <input type="button" value="Menor Taxa"><br>
-            <input type="button" value="Maior Tempo" id="inputSelecionado"> <input type="button"
-                value="Menor Tempo"><br>
+            <select onchange="selectFilterChange()" id="selectFilter" >
+                <option value="">-</option>
+                <option id="entrega" value="entrega">Entrega Grátis</option>
+                <option id="maiorTaxa" value="maiorTaxa">Maior Taxa</option>
+                <option id="menorTaxa" value="menorTaxa">Menor Taxa</option>
+                <option id="maiorTempo" value="maiorTempo">Maior Tempo</option>
+                <option id="menorTempo" value="menorTempo">Menor Tempo</option>
+            </select>
         </fieldset>
     </div>
     <br>
@@ -68,9 +76,48 @@
 
     </div>
 
-    <input type="button" value="Voltar">
+    <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">
 
 
+    <script>
+        valueFilter = document.getElementById("selectFilter").value;
+
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
+        if(params.filter){
+            document.getElementById(params.filter).selected = 'selected';
+        }
+
+
+        function selectFilterChange() {
+            valueFilter = document.getElementById("selectFilter").value;
+
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const params = Object.fromEntries(urlSearchParams.entries());
+
+            if(params.filter){
+                if(valueFilter !== ''){
+                    var queryParams = new URLSearchParams(window.location.search);
+
+                    queryParams.set("filter", valueFilter);
+
+                    history.pushState(null, null, "?"+queryParams.toString());
+
+                    window.location.reload(false);
+                }
+
+            }else{
+                window.location.href = window.location.href + '&filter=' + valueFilter
+            }
+
+        }
+
+
+
+
+    //http://localhost:8080/cliente/searchCategory?categoria=4&myVar=awesomeValue
+    </script>
 </div>
 </body>
 

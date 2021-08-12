@@ -22,7 +22,7 @@
     <div id="divCategoriasComidaGeral">
 
         <div class="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
-            <a href="#">
+            <a th:href="@{/cliente/searchCategory} + '?categoria=' + ${categoria.id}">
                 <img class="imgCategoriaComida" alt="" th:src="@{/image/categoria/} + ${categoria.imagem}">
                 <br>
 
@@ -53,6 +53,8 @@
 
 
     </div>
+
+
 </div>
 </body>
 

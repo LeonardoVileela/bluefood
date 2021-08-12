@@ -18,7 +18,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/cliente")
@@ -83,10 +86,11 @@ public class ClienteController {
     }
 
     @GetMapping(path = "/search")
-    public String search(@RequestParam String busca, Model model) {
-        System.out.println(busca);
+    public String search(@RequestParam String busca, @RequestParam(required = false) String filter, Model model) throws Exception {
 
         List<Restaurante> restaurantes = restauranteService.search(busca);
+        //método filter responsavel pelos filtros de pesquisa
+        restaurantes = restauranteService.filter(filter, restaurantes);
 
         model.addAttribute("restaurantes", restaurantes);
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
@@ -94,5 +98,19 @@ public class ClienteController {
 
         return "cliente-busca";
     }
+
+    @GetMapping(path = "/searchCategory")
+    public String searchCategory(@RequestParam Integer categoria, @RequestParam(required = false) String filter, Model model) throws Exception {
+
+        List<Restaurante> restaurantes = restauranteService.searchCategory(categoria);
+        restaurantes = restauranteService.filter(filter, restaurantes);
+
+        model.addAttribute("restaurantes", restaurantes);
+        List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
+        model.addAttribute("categorias", categorias);
+
+        return "cliente-busca";
+    }
+
 
 }

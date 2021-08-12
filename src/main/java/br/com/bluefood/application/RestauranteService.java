@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RestauranteService {
@@ -82,6 +85,38 @@ public class RestauranteService {
     }
 
     public List<Restaurante> search(String search){
-        return restauranteRepository.findAll();
+
+        return restauranteRepository.findByNomeIgnoreCaseContaining(search);
+    }
+
+    public List<Restaurante> searchCategory(Integer search){
+
+        return restauranteRepository.findByCategorias_Id(search);
+    }
+
+    public List<Restaurante> filter(String filter, List<Restaurante> restaurantes) throws Exception{
+
+        if (filter != null) {
+            if (filter.equals("maiorTaxa")) {
+                Collections.sort(restaurantes, Restaurante.MaiorTaxaEntrega);
+            } else if (filter.equals("menorTaxa")) {
+                Collections.sort(restaurantes, Restaurante.MenorTaxaEntrega);
+            } else if (filter.equals("maiorTempo")) {
+                Collections.sort(restaurantes, Restaurante.MaiorTempoEntregaBase);
+            } else if (filter.equals("menorTempo")) {
+                Collections.sort(restaurantes, Restaurante.MenorTempoEntregaBase);
+            } else if (filter.equals("entrega")) {
+                List<Restaurante> filteredRestaurante = restaurantes.stream()
+                        .filter(restaurant -> restaurant.getTaxaEntrega().compareTo(BigDecimal.ZERO) == 0)
+                        .collect(Collectors.toList());
+                restaurantes = filteredRestaurante;
+                System.out.println(filteredRestaurante.toString());
+
+            }else {
+                throw new Exception("Filtro desconhecido");
+            }
+        }
+
+        return restaurantes;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @Entity
 @Table(name = "restaurante")
-public class Restaurante extends Usuario {
+public class Restaurante extends Usuario{
 
     @NotBlank(message = "O CNPJ não pode ser vazio")
     @Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inválido")
@@ -67,4 +68,56 @@ public class Restaurante extends Usuario {
         return String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
 
     }
+
+
+    public static Comparator<Restaurante> MenorTaxaEntrega = new Comparator<Restaurante>() {
+
+        public int compare(Restaurante r1, Restaurante r2) {
+            BigDecimal taxaEntrega1 = r1.getTaxaEntrega();
+            BigDecimal taxaEntrega2 = r2.getTaxaEntrega();
+
+
+            return taxaEntrega1.compareTo(taxaEntrega1);
+
+
+        }
+    };
+
+    public static Comparator<Restaurante> MaiorTaxaEntrega = new Comparator<Restaurante>() {
+
+        public int compare(Restaurante r1, Restaurante r2) {
+            BigDecimal taxaEntrega1 = r1.getTaxaEntrega();
+            BigDecimal taxaEntrega2 = r2.getTaxaEntrega();
+
+            return taxaEntrega2.compareTo(taxaEntrega1);
+
+
+        }
+    };
+
+    public static Comparator<Restaurante> MenorTempoEntregaBase = new Comparator<Restaurante>() {
+
+        public int compare(Restaurante r1, Restaurante r2) {
+
+            Integer tempoEntregaBase1 = r1.getTempoEntregaBase();
+            Integer tempoEntregaBase2 = r2.getTempoEntregaBase();
+
+            return tempoEntregaBase1.compareTo(tempoEntregaBase2);
+
+        }
+    };
+
+    public static Comparator<Restaurante> MaiorTempoEntregaBase = new Comparator<Restaurante>() {
+
+        public int compare(Restaurante r1, Restaurante r2) {
+
+            Integer tempoEntregaBase1 = r1.getTempoEntregaBase();
+            Integer tempoEntregaBase2 = r2.getTempoEntregaBase();
+
+            return tempoEntregaBase2.compareTo(tempoEntregaBase1);
+
+
+        }
+    };
+
 }
