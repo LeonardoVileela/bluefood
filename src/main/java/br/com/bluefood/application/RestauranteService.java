@@ -119,4 +119,8 @@ public class RestauranteService {
 
         return restaurantes;
     }
+
+    public Restaurante searchRestauranteById(Integer id){
+        return restauranteRepository.findById(id).orElseThrow();
+    }
 }

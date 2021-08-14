@@ -3,6 +3,7 @@ package br.com.bluefood.domain.restaurante;
 import br.com.bluefood.domain.usuario.Usuario;
 import br.com.bluefood.infrastructure.web.validator.UploadConstraint;
 import br.com.bluefood.util.FileType;
+import br.com.bluefood.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -67,6 +69,31 @@ public class Restaurante extends Usuario{
 
         return String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
 
+    }
+
+    public Integer calcularTempoEntrega(String cep) {
+        int soma = 0;
+
+        for (char c : cep.toCharArray()) {
+            int v = Character.getNumericValue(c);
+            if (v > 0) {
+                soma += v;
+            }
+        }
+
+        soma /= 2;
+
+        return tempoEntregaBase + soma;
+    }
+
+    public String getCategoriasAsText() {
+        Set<String> strings = new LinkedHashSet<>();
+
+        for (CategoriaRestaurante categoria : categorias) {
+            strings.add(categoria.getNome());
+        }
+
+        return StringUtils.concatenate(strings);
     }
 
 

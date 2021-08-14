@@ -54,8 +54,8 @@
     <div>
 
         <div th:each="restaurante : ${restaurantes}">
-            <a href="#">
-                <img class="imgRestauranteOpcao"  th:src="@{/image/logotipo/} + ${restaurante.logotipo}">
+            <a th:href="@{/cliente/restaurante} + '?restautenteId=' + ${restaurante.id}">
+                <img class="imgRestauranteOpcao" th:src="@{/image/logotipo/} + ${restaurante.logotipo}">
                 <br>
                 <span class="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span>
                 <br>
@@ -63,7 +63,7 @@
                     <span th:text="${categoria.nome}"></span>
                 </div>
                 <br>
-                <span th:text="'Tempo médio de entrega: '+ ${restaurante.tempoEntregaBase} + 'm'"></span>
+                <span th:text="'Tempo médio de entrega: '+ ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span>
                 <br>
                 <span th:text="'Taxa de entrega: R$ ' + ${restaurante.taxaEntrega}"></span>
                 <br>

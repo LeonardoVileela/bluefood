@@ -37,6 +37,20 @@ public class SecurityUtils {
         return (Cliente) loggedUser.getUsuario();
     }
 
+    public static Boolean loggedClienteByHome() {
+        LoggedUser loggedUser = loggedUser();
+
+        if (loggedUser == null) {
+            return false;
+        }
+
+        if (!(loggedUser.getUsuario() instanceof Cliente)) {
+            return false;
+        }
+
+        return true;
+    }
+
     //verifica se restaurante está logado
     public static Restaurante loggedRestaurante() {
         LoggedUser loggedUser = loggedUser();
@@ -50,5 +64,19 @@ public class SecurityUtils {
         }
 
         return (Restaurante) loggedUser.getUsuario();
+    }
+
+    public static Boolean loggedRestauranteByHome() {
+        LoggedUser loggedUser = loggedUser();
+
+        if (loggedUser == null) {
+            return false;
+        }
+
+        if (!(loggedUser.getUsuario() instanceof Restaurante)) {
+            return false;
+        }
+
+        return true;
     }
 }

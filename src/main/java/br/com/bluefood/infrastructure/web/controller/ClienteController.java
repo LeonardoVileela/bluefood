@@ -95,6 +95,7 @@ public class ClienteController {
         model.addAttribute("restaurantes", restaurantes);
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
         model.addAttribute("categorias", categorias);
+        model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
 
         return "cliente-busca";
     }
@@ -108,8 +109,21 @@ public class ClienteController {
         model.addAttribute("restaurantes", restaurantes);
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
         model.addAttribute("categorias", categorias);
+        model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
 
         return "cliente-busca";
+    }
+
+    @GetMapping(path = "/restaurante")
+    public String viewRestaurante(
+            @RequestParam Integer restautenteId,
+            Model model
+    ){
+
+        Restaurante restaurante = restauranteService.searchRestauranteById(restautenteId);
+        model.addAttribute("restaurante", restaurante);
+        model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());//pega o cep do cliente logado
+        return "cliente-restaurante";
     }
 
 
