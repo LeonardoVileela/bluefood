@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+        lang="pt-br">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/prototipo/plugins/fontawesome-free/css/all.min.css}" >
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/prototipo/dist/css/adminlte.min.css}" >
+</head>
+
+<body>
+
+  <section class="content-header">
+    <div class="container-fluid">
+    
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <form th:action="@{/restaurante/item/save}" method="POST" th:object="${itemCardapio}" enctype="multipart/form-data">
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- right column -->
+        <div class="col-md-12">
+          <div class="card card-danger">
+            <div class="card-header">
+              <h3 class="card-title">Adicionar Item</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Nome:</label>
+                    <input th:field="*{nome}"  type="text" id="nome" name="nome" class="form-control" placeholder="Nome...">
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+
+                    <label>Categoria:</label>
+                    <input th:field="*{categoria}"  type="text" id="categoria" name="categoria" class="form-control" placeholder="Categoria...">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Imagem:</label>
+                    <input th:field="*{descricao}"  type="text" id="descricao" name="descricao" class="form-control" placeholder="Imagem...">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Preço:</label>
+                    <input th:field="*{preco}"  type="text" id="preco" name="preco"  class="form-control" placeholder="Preço...">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="logotipo">Imagem:</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input th:field="*{logotipoFile}"  type="file" id="logotipo" name="logotipo" class="custom-file-input">
+                        <label class="custom-file-label" for="logotipo">Escolha a imagem</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!--/.col (right) -->
+
+       
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  <div style="text-align: center;">
+    <button style="max-width: 200px;" type="submit" class="btn-lg btn-danger">Cadastrar</button>
+  </div>
+
+  </form>
+
+
+  <!-- jQuery -->
+  <script th:src="@{/prototipo/plugins/jquery/jquery.min.js}" ></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/prototipo/plugins/bootstrap/js/bootstrap.bundle.min.js}" ></script>
+  <!-- bs-custom-file-input -->
+  <script th:src="@{/prototipo/plugins/bs-custom-file-input/bs-custom-file-input.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/prototipo/dist/js/adminlte.min.js}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script th:src="@{/prototipo/dist/js/demo.js}"></script>
+  <!-- Page specific script -->
+  <script>
+    $(function () {
+      bsCustomFileInput.init();
+    });
+  </script>
+</body>
+
+</html>
