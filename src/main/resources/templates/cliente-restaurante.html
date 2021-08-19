@@ -39,13 +39,13 @@
 
     <div>
         <div th:each="itemCardapio : ${itemCardapios}">
-            <img class="imgRestauranteOpcao" src="images/sys_comidaPizzaCalabresa.png" alt="">
+            <img class="imgRestauranteOpcao" th:src="@{/image/comida/} + ${itemCardapio.logotipo}" alt="">
             <br>
-            <span th:text="itemCardapio.nome"></span>
+            <span th:text="${itemCardapio.nome}"></span>
             <br>
-            <span th:text="itemCardapio.descricao"></span>
+            <span th:text="'DESCRIÇÃO: ' + ${itemCardapio.descricao}"></span>
             <br>
-            <span th:text="itemCardapio.preco"><b></b></span>
+            <span th:text="'PREÇO: R$' + ${itemCardapio.preco}"><b></b></span>
             <br>
             <br>
 
