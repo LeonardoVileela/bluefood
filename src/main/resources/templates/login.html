@@ -2,44 +2,78 @@
 <html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
-        layout:decorate="~{Layout}">
+        lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JAVAFOOD</title>
 
-    <body>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{/loginPlugins/all.min.css}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" th:href="@{/loginPlugins/icheck-bootstrap.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/loginPlugins/adminlte.min.css}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a><b>JAVA</b>FOOD</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Faça login para iniciar sua sessão</p>
 
-    <div layout:fragment="content">
-        <div>
-            <img id="imgIconeUsuario" th:src="@{/images/bf_iconeUsuario.png}" alt="">
-
-            <h1>Autenticação</h1>
-            <form method="POST" th:action="@{/login}">
-                <fieldset>
-                    <input type="text" name="username" placeholder="E-mail..."><br>
-                    <input type="password" name="password" placeholder="Senha..."><br>
-                    <input type="submit" value="Entrar" name="" id="">
-                </fieldset>
-            </form>
-            <br>
-
-            <div class="mensagemDeErro" th:if="${msg != null}">
-                <span class="spanError"></span>
-                <span class="textError" th:text="${msg}"></span>
+      <form th:action="@{/login}" method="POST">
+        <div class="input-group mb-3">
+          <input type="email" name="username" class="form-control" placeholder="Email...">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
-            <br>
-
-            <form method="get" th:action="@{/public/cliente/new}">
-                <input type="submit" value="Gostaria de criar a minha conta de usuario">
-            </form>
-
-            <br>
-            <form method="get" th:action="@{/public/restaurante/new}">
-                <input type="submit" value="Gostaria de criar minha conta de restaurante">
-            </form>
-
-
-
-
+          </div>
         </div>
-    </div>
-    </body>
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Senha...">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
 
+      <div class="social-auth-links text-center mb-3">
+        <p>- OU -</p>
+        <a th:href="@{/public/cliente/new}" class="btn btn-block btn-primary">
+          Cadastrar como CLIENTE
+        </a>
+        <a th:href="@{/public/restaurante/new}" class="btn btn-block btn-danger">
+          Cadastrar como RESTAURANTE
+        </a>
+      </div>
+      <!-- /.social-auth-links -->
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script th:src="@{/loginPlugins/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/loginPlugins/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/loginPlugins/adminlte.min.js}"></script>
+</body>
 </html>

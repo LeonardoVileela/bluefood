@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/images/**","/css/**", "/js/**", "/public", "/sbpay").permitAll() //autoriza acesso a todas essas urls
+                .antMatchers("/images/**","/css/**", "/js/**", "/public", "/sbpay", "/loginPlugins/**").permitAll() //autoriza acesso a todas essas urls
                 .antMatchers("/cliente/**").hasRole(Role.CLIENTE.toString()) //no caso de cliente tem que ter o role cliente
                 .antMatchers("/restaurante/**").hasRole(Role.RESTAURANTE.toString()) // no caso de restaurante tem que ter o role restaurante
                 .anyRequest().authenticated() //todas as outras necessario autenticação

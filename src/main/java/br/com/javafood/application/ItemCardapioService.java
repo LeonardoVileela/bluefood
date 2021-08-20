@@ -2,9 +2,12 @@ package br.com.javafood.application;
 
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.restaurante.ItemCardapioRepository;
+import br.com.javafood.domain.restaurante.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ItemCardapioService {
@@ -31,5 +34,9 @@ public class ItemCardapioService {
             imageService.uploadItemCardapio(itemCardapio.getLogotipoFile(),itemCardapio.getLogotipo());
             itemCardapioRepository.save(itemCardapio);
 
+    }
+
+    public List<ItemCardapio> searchByRestauranteid(Integer search){
+        return itemCardapioRepository.findByRestaurante_IdOrderByNome(search);
     }
 }

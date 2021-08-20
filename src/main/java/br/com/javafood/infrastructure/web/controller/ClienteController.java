@@ -1,12 +1,14 @@
 package br.com.javafood.infrastructure.web.controller;
 
 import br.com.javafood.application.ClienteService;
+import br.com.javafood.application.ItemCardapioService;
 import br.com.javafood.application.RestauranteService;
 import br.com.javafood.application.ValidationException;
 import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
 import br.com.javafood.domain.restaurante.CategoriaRestaurante;
 import br.com.javafood.domain.restaurante.CategoriaRestauranteRepository;
+import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.restaurante.Restaurante;
 import br.com.javafood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class ClienteController {
 
     @Autowired
     private RestauranteService restauranteService;
+
+    @Autowired
+    private ItemCardapioService itemCardapioService;
 
     @Autowired
     private ClienteService clienteService;
@@ -116,8 +121,10 @@ public class ClienteController {
             Model model
     ){
 
+
         Restaurante restaurante = restauranteService.searchRestauranteById(restautenteId);
-        model.addAttribute("itemCardapios", restaurante.getItemCardapios());
+        List<ItemCardapio> itemCardapios = itemCardapioService.searchByRestauranteid(restautenteId);
+        model.addAttribute("itemCardapios", itemCardapios);
         model.addAttribute("restaurante", restaurante);
         model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());//pega o cep do cliente logado
         return "cliente-restaurante";

@@ -58,6 +58,7 @@ public class Restaurante extends Usuario{
     @ToString.Exclude //marcação IMPORTANTEEE Lombok buga o to String em atributos que tem relacionamento, sempre colocar essa marcação
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "restaurante", fetch = FetchType.EAGER) //não precisa de fazer @JoinTable em relacionamento one tomay ou manytoon
     private Set<ItemCardapio> itemCardapios = new HashSet<>(0);
 
