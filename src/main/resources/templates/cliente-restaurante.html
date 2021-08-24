@@ -2,87 +2,100 @@
 <html
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
-        layout:decorate="~{Layout}" th:with="link=@{/cliente/home}"> <!-- Manda variavel pra pagina layout -->
+        lang="pt-br">
 
-<body>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{/cssIfood/styles.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <title>iFood</title>
+</head>
 
-<div layout:fragment="content">
+<body style="background-color: white;">
 
-    <div>
-        <img class="imgRestauranteOpcao" th:src="@{/image/logotipo/} + ${restaurante.logotipo}">
-        <br>
-        <span class="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span>
-        <br>
-        <span th:text="${restaurante.getCategoriasAsText()}"></span>
-        <br>
-        <br>
-        <span th:text="'Tempo médio de entrega: '+ ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span>
-        <br>
-        <span th:text="'Taxa de entrega: R$ ' + ${restaurante.taxaEntrega}"></span>
-        <br>
+
+<!-- BG -->
+<center>
+
+    <div class="content">
+        <img style="margin-top: 10px" th:src="@{/image/logotipo/} + ${restaurante.logotipo}" alt="" class="logo"/>
+
     </div>
 
-    <div>
-        <h1>Opções</h1>
-        <fieldset>
-            <legend>Filtros</legend>
-            <input type="button" value="Promoções">
-            <input type="button" value="Saladas">
-            <input type="button" value="Bebidas">
-        </fieldset>
-        <br>
-    </div>
-
-    <div>
-        <h1>Items</h1>
-    </div>
-
-    <div>
-        <div th:each="itemCardapio : ${itemCardapios}">
-            <img class="imgRestauranteOpcao" th:src="@{/image/comida/} + ${itemCardapio.logotipo}" alt="">
-            <br>
-            <span th:text="${itemCardapio.nome}"></span>
-            <br>
-            <span th:text="'DESCRIÇÃO: ' + ${itemCardapio.descricao}"></span>
-            <br>
-            <span th:text="'PREÇO: R$' + ${itemCardapio.preco}"><b></b></span>
-            <br>
-            <br>
-
-            <form action="" method="POST">
-                <label for="quantidade">Quantidade:</label>
-                <br>
-                <select style="width: 60px; margin-top: 5px;" name="quantidade" id="quantidade">
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                </select>
-                <br><br>
-
-                Observações:
-                <br>
-
-                <textarea name="" id="" cols="30" rows="3">
-
-                </textarea>
-                <br><br>
-
-                <input type="button" value="Adicionar ao carrinho">
-
-            </form>
+</center>
 
 
+<center>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm banner">
+                <div class="card" style="margin: 10px !important; width: 18rem;">
+                    <div class="card-body">
+                        <h5 th:text="${restaurante.nome}" class="card-title"></h5>
+                        <p class="card-text">
+                            <span th:text="${restaurante.getCategoriasAsText()}"></span>
+                            <br>
+                            <br>
+                            <span th:text="'Tempo médio de entrega: '+ ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span>
+                            <br>
+                            <span th:text="'Taxa de entrega: R$ ' + ${restaurante.taxaEntrega}"></span>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
     </div>
+</center>
+
+<h1 style="margin-bottom: 40px" class="titleResultado">Items</h1>
 
 
-    <input type="button" value="Voltar" onclick="goBack()">
+<center>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm banner" th:each="itemCardapio : ${itemCardapios}">
+                <div class="card" style="margin: 10px !important; width: 18rem;">
+                    <img style="height: 286px;" th:src="@{/image/comida/} + ${itemCardapio.logotipo}" alt="...">
+                    <div class="card-body">
+                        <h5 th:text="${itemCardapio.nome}" class="card-title"></h5>
+                        <p class="card-text">
+                            <span th:text="${itemCardapio.descricao}"></span>
+                            <br>
+                            <span th:text="'R$ ' + ${itemCardapio.preco}"></span>
+                            <br>
+                            <br>
+                        </p>
+                        <a th:href="@{/cliente/carrinho} + '?itemCarrinhoId=' + ${itemCardapio.id}"
+                           class="btn btn-danger">Adicionar no carrinho</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+<input type="button" value="Voltar" onclick="goBack()">
 
 
+<div class="footer">
+    <img th:src="@{/imagesIfood/logofooter.svg}" alt=""/>
+    <span>© Copyright 2020 - iFood <br/>Todos os direitos reservados</span>
 </div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+
 </body>
 
 </html>

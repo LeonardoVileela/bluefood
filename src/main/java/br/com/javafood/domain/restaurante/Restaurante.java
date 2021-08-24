@@ -105,7 +105,7 @@ public class Restaurante extends Usuario{
             BigDecimal taxaEntrega2 = r2.getTaxaEntrega();
 
 
-            return taxaEntrega1.compareTo(taxaEntrega1);
+            return taxaEntrega1.compareTo(taxaEntrega2);
 
 
         }

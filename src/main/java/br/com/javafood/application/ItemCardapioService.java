@@ -36,7 +36,12 @@ public class ItemCardapioService {
 
     }
 
+
     public List<ItemCardapio> searchByRestauranteid(Integer search){
         return itemCardapioRepository.findByRestaurante_IdOrderByNome(search);
+    }
+
+    public ItemCardapio searchById(Integer id){
+        return itemCardapioRepository.findById(id).get();
     }
 }

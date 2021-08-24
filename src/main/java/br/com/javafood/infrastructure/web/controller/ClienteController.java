@@ -119,7 +119,7 @@ public class ClienteController {
     public String viewRestaurante(
             @RequestParam Integer restautenteId,
             Model model
-    ){
+    ) {
 
 
         Restaurante restaurante = restauranteService.searchRestauranteById(restautenteId);
@@ -128,6 +128,19 @@ public class ClienteController {
         model.addAttribute("restaurante", restaurante);
         model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());//pega o cep do cliente logado
         return "cliente-restaurante";
+    }
+
+    @GetMapping(path = "/carrinho")
+    public String carrinho(
+            @RequestParam(required = false) Integer itemCarrinhoId,
+            Model model
+    ) {
+        ItemCardapio itemCardapio = itemCardapioService.searchById(itemCarrinhoId);
+        SecurityUtils.loggedCliente().addItemCarrinho(itemCardapio);
+        List<ItemCardapio> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
+        model.addAttribute("carrinho", itemsCarrinho);
+        //TODO Fazer template dessa pagina
+        return "teste";
     }
 
 
