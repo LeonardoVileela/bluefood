@@ -2,14 +2,9 @@ package br.com.javafood.domain.restaurante;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,6 +12,7 @@ import javax.validation.constraints.Size;
 
 import br.com.javafood.infrastructure.web.validator.UploadConstraint;
 import br.com.javafood.util.FileType;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.EqualsAndHashCode;
@@ -27,7 +23,6 @@ import lombok.Setter;
 @Table(name = "item_cardapio")
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ItemCardapio implements Serializable {
 
 
@@ -78,4 +73,16 @@ public class ItemCardapio implements Serializable {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemCardapio that = (ItemCardapio) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

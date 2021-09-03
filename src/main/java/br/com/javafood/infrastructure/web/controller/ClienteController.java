@@ -11,6 +11,8 @@ import br.com.javafood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.restaurante.Restaurante;
 import br.com.javafood.util.SecurityUtils;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(path = "/cliente")
@@ -136,11 +141,17 @@ public class ClienteController {
             Model model
     ) {
         ItemCardapio itemCardapio = itemCardapioService.searchById(itemCarrinhoId);
-        SecurityUtils.loggedCliente().addItemCarrinho(itemCardapio);
-        List<ItemCardapio> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
-        model.addAttribute("carrinho", itemsCarrinho);
-        //TODO Fazer template dessa pagina
-        return "teste";
+        if(SecurityUtils.loggedCliente().contain(itemCardapio)){
+            SecurityUtils.loggedCliente().addExisting(itemCardapio.getId());
+        }else{
+            System.out.println("not contain");
+            SecurityUtils.loggedCliente().addItemCarrinho(itemCardapio);
+        }
+        Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
+        model.addAttribute("itemsCarrinho", itemsCarrinho);
+
+
+        return "carrinho";
     }
 
 

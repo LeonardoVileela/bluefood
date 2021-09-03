@@ -2,6 +2,8 @@ package br.com.javafood.domain.cliente;
 
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.usuario.Usuario;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -31,19 +32,42 @@ public class Cliente extends Usuario {
     private String cep;
 
     @Transient
-    private List<ItemCardapio> carrinho = new ArrayList<>();
-
+    private Map<ItemCardapio, Integer> carrinho = new HashMap<>();
 
     public void addItemCarrinho(ItemCardapio itemCardapio){
-        this.carrinho.add(itemCardapio);
+        System.out.println(itemCardapio.getId());
+        this.carrinho.put(itemCardapio, 1);
+        System.out.println(this.carrinho);
+        System.out.println();
     }
 
     public void esvaziarCarrinho(){
         carrinho.clear();
     }
 
-    public List<ItemCardapio> getItemsCarrinho(){
+    public Map<ItemCardapio, Integer> getItemsCarrinho(){
         return this.carrinho;
+    }
+
+    public boolean contain(ItemCardapio itemCardapio){
+
+        for (var car : this.carrinho.entrySet()) {
+            if (car.getKey().getId() == itemCardapio.getId()){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    public void addExisting(int id){
+        for (var car : this.carrinho.entrySet()) {
+            if (car.getKey().getId() == id){
+                car.setValue(car.getValue() + 1);
+            }
+        }
+
     }
 
 }
