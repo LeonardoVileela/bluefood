@@ -132,6 +132,8 @@ public class ClienteController {
         model.addAttribute("itemCardapios", itemCardapios);
         model.addAttribute("restaurante", restaurante);
         model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());//pega o cep do cliente logado
+        List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
+        model.addAttribute("categorias", categorias);
         return "cliente-restaurante";
     }
 

@@ -12,8 +12,6 @@ body {
 	height: 500px;
 }
 .hero {
-	height: 80%;
-	max-height: 520px;
 	background-color: white;
 }
 
@@ -177,6 +175,7 @@ body {
 
 .titleResultado
 {
+	margin-top: 50px;
 	text-align: center;
 	color: #ea1d2c;
 	text-transform: uppercase;

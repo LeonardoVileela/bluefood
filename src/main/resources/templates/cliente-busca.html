@@ -19,43 +19,82 @@
 
 <body style="background-color: white;">
 
-<div class="prime" id="divPrime">
-
-    <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">
-
-    <div class="hero">
-
-        <!-- BG -->
-        <center>
-            <div class="bg">
-
-                <div class="content">
-                    <img style="margin-top: 10px" th:src="@{/imagesIfood/logo.png}" alt="" class="logo"/>
-                    <form th:action="@{/cliente/search}" method="GET">
-                        <div class="form">
-                            <div class="search">
-                                <img th:src="@{/imagesIfood/search.svg}" alt=""/>
-                                <input id="buscaHome" name="busca" type="text" placeholder="Buscar..."/>
-                            </div>
-                            <button type="submit">Buscar</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/imagesIfood/logo-java.svg}" alt="" height="24" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'" >HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MEU CARRINHO</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        CATEGORIAS
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div th:each="categoria : ${categorias}">
+                            <li><a class="dropdown-item"th:href="@{/cliente/searchCategory} + '?categoria=' + ${categoria.id}" th:text="${categoria.nome}"></a></li>
                         </div>
-                    </form>
-                    <div class="tags">
-                        <div class="container">
-                            <div class="row">
-                                <a id="categoria" class="col-sm" th:each="categoria : ${categorias}"
-                                   th:href="@{/cliente/searchCategory} + '?categoria=' + ${categoria.id}"
-                                   th:text="'#' + ${categoria.nome}"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </center>
-    </div>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" th:action="@{/cliente/search}" method="GET">
+                <!-- <img style="margin-right: 10px" th:src="@{/imagesIfood/logo-java.svg}" alt="" width="50" />-->
+                 <input name="busca" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                 <button class="btn btn-outline-danger" type="submit">BUSCAR</button>
+             </form>
+         </div>
+     </div>
+ </nav>
+ <!--
+ <div class="prime" id="divPrime">
+
+     <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">
+
+     <div class="hero">
 
 
-</div>
+         <center>
+             <div class="bg">
+
+                 <div class="content">
+                     <img style="margin-top: 10px" th:src="@{/imagesIfood/logo.png}" alt="" class="logo"/>
+                     <form th:action="@{/cliente/search}" method="GET">
+                         <div class="form">
+                             <div class="search">
+                                 <img th:src="@{/imagesIfood/search.svg}" alt=""/>
+                                 <input id="buscaHome" name="busca" type="text" placeholder="Buscar..."/>
+                             </div>
+                             <button type="submit">Buscar</button>
+                         </div>
+                     </form>
+
+                     <div class="tags">
+                         <div class="container">
+                             <div class="row">
+                                 <a id="categoria" class="col-sm" th:each="categoria : ${categorias}"
+                                    th:href="@{/cliente/searchCategory} + '?categoria=' + ${categoria.id}"
+                                    th:text="${categoria.nome}"></a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </center>
+     </div>
+
+
+ </div>
+
+ -->
 
 
 <div>
@@ -145,10 +184,10 @@
         }
 
     }
-
+/*
     if (window.matchMedia("(min-width: 570px)").matches) {
         document.getElementById("divPrime").style.height = "300px";
-    }
+    }*/
 
 
     //http://localhost:8080/cliente/searchCategory?categoria=4&myVar=awesomeValue
