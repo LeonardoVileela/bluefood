@@ -54,48 +54,6 @@
          </div>
      </div>
  </nav>
- <!--
- <div class="prime" id="divPrime">
-
-     <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">
-
-     <div class="hero">
-
-
-         <center>
-             <div class="bg">
-
-                 <div class="content">
-                     <img style="margin-top: 10px" th:src="@{/imagesIfood/logo.png}" alt="" class="logo"/>
-                     <form th:action="@{/cliente/search}" method="GET">
-                         <div class="form">
-                             <div class="search">
-                                 <img th:src="@{/imagesIfood/search.svg}" alt=""/>
-                                 <input id="buscaHome" name="busca" type="text" placeholder="Buscar..."/>
-                             </div>
-                             <button type="submit">Buscar</button>
-                         </div>
-                     </form>
-
-                     <div class="tags">
-                         <div class="container">
-                             <div class="row">
-                                 <a id="categoria" class="col-sm" th:each="categoria : ${categorias}"
-                                    th:href="@{/cliente/searchCategory} + '?categoria=' + ${categoria.id}"
-                                    th:text="${categoria.nome}"></a>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </center>
-     </div>
-
-
- </div>
-
- -->
-
 
 <div>
     <h1 class="titleResultado">Resultados</h1>
@@ -141,10 +99,6 @@
     </div>
 </center>
 
-
-
-
-
 <div class="footer">
     <img th:src="@{/imagesIfood/logofooter.svg}" alt=""/>
     <span>© Copyright 2020 - iFood <br/>Todos os direitos reservados</span>
@@ -184,10 +138,6 @@
         }
 
     }
-/*
-    if (window.matchMedia("(min-width: 570px)").matches) {
-        document.getElementById("divPrime").style.height = "300px";
-    }*/
 
 
     //http://localhost:8080/cliente/searchCategory?categoria=4&myVar=awesomeValue
