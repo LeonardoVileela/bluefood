@@ -18,6 +18,7 @@
       <!-- Title -->
       <div class="title">
         Shopping Bag
+        <button th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">Coninuar comparando</button>
       </div>
 
       <!-- Product #1 -->
@@ -51,13 +52,11 @@
         <div th:text="${instance.value * instance.key.getPreco()}" class="total-price">$549</div>
       </div>
       </div>
-
-      <button>Coninuar comparando</button>
-      <button>Finalizar compra</button>
-
     </div>
 
-
+    <center>
+    <button>Finalizar compra</button>
+    </center>
 
     <script type="text/javascript">
       $('.minus-btn').on('click', function(e) {
