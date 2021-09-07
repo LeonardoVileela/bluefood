@@ -35,8 +35,8 @@
 
     
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
+        <a th:onclick="'location.href=\'' + @{/logout} + '\';'" class="nav-link" role="button">
+          <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
       
@@ -93,9 +93,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/public/cliente/new" class="nav-link">
+                <a href="/restaurante/pedido/pendentes" class="nav-link">
                   <i class="far fa-list-alt nav-icon"></i>
-                  <p>Todos os Itens</p>
+                  <p>Pedidos pendentes</p>
                 </a>
               </li>
               <li class="nav-item">

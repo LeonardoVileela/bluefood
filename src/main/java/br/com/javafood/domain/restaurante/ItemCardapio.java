@@ -2,7 +2,9 @@ package br.com.javafood.domain.restaurante;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -10,12 +12,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.javafood.domain.pedido.PedidoItemCardapio;
 import br.com.javafood.infrastructure.web.validator.UploadConstraint;
 import br.com.javafood.util.FileType;
-import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -62,6 +63,9 @@ public class ItemCardapio implements Serializable {
 
     @UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo não é um arquivo de imagem válido")
     private transient MultipartFile imagemFile;
+
+    @OneToMany(mappedBy = "pedido")
+    private Set<PedidoItemCardapio> pedido = new HashSet<PedidoItemCardapio>();
 
 
     public String setImagemFileName() {

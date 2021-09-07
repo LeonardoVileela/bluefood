@@ -4,6 +4,8 @@ import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
 import br.com.javafood.domain.restaurante.Restaurante;
 import br.com.javafood.domain.restaurante.RestauranteRepository;
+import br.com.javafood.domain.pedido.PedidoItemCardapio;
+import br.com.javafood.domain.pedido.PedidoItemCardapioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,12 @@ public class RestauranteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private RestauranteService restauranteService;
+
+    @Autowired
+    private PedidoItemCardapioRepository pedidoItemCardapioRepository;
 
     //injeção de dependencias de imagem service
     @Autowired
@@ -120,5 +128,10 @@ public class RestauranteService {
 
     public Restaurante searchRestauranteById(Integer id){
         return restauranteRepository.findById(id).orElseThrow();
+    }
+
+
+    public List<PedidoItemCardapio> findPedidos(Integer id){
+        return pedidoItemCardapioRepository.findPedidos(id);
     }
 }

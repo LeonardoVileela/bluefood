@@ -1,9 +1,6 @@
 package br.com.javafood.infrastructure.web.controller;
 
-import br.com.javafood.application.ClienteService;
-import br.com.javafood.application.ItemCardapioService;
-import br.com.javafood.application.RestauranteService;
-import br.com.javafood.application.ValidationException;
+import br.com.javafood.application.*;
 import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
 import br.com.javafood.domain.restaurante.CategoriaRestaurante;
@@ -11,8 +8,6 @@ import br.com.javafood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.restaurante.Restaurante;
 import br.com.javafood.util.SecurityUtils;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -21,8 +16,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +34,9 @@ public class ClienteController {
 
     @Autowired
     private ItemCardapioService itemCardapioService;
+
+    @Autowired
+    private PedidoService pedidoService;
 
     @Autowired
     private ClienteService clienteService;
@@ -179,5 +175,15 @@ public class ClienteController {
         SecurityUtils.loggedCliente().removeItemCarrinho(itemCardapio);
 
         return "redirect:/cliente/carrinho";
+    }
+
+
+    @GetMapping(path = "/carrinho/save")
+    public String saveCarrinho(
+    ){
+
+        Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
+        pedidoService.save(itemsCarrinho);
+        return "redirect:/cliente/home";
     }
 }
