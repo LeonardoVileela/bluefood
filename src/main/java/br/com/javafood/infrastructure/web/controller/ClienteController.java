@@ -140,21 +140,44 @@ public class ClienteController {
     @GetMapping(path = "/carrinho")
     public String carrinho(
             @RequestParam(required = false) Integer itemCarrinhoId,
+            @RequestParam(required = false) String quant,
             Model model
     ) {
-        ItemCardapio itemCardapio = itemCardapioService.searchById(itemCarrinhoId);
-        if(SecurityUtils.loggedCliente().contain(itemCardapio)){
-            SecurityUtils.loggedCliente().addExisting(itemCardapio.getId());
-        }else{
-            System.out.println("not contain");
-            SecurityUtils.loggedCliente().addItemCarrinho(itemCardapio);
+
+        if(itemCarrinhoId != null){
+            if(quant != null){
+                if(quant.equals("plus")){
+                    SecurityUtils.loggedCliente().addExisting(itemCarrinhoId);
+                }
+                if(quant.equals("minus")){
+                    SecurityUtils.loggedCliente().quitExisting(itemCarrinhoId);
+                }
+            }else{
+                ItemCardapio itemCardapio = itemCardapioService.searchById(itemCarrinhoId);
+                if(SecurityUtils.loggedCliente().contain(itemCardapio)){
+                    SecurityUtils.loggedCliente().addExisting(itemCardapio.getId());
+                }else{
+                    System.out.println("not contain");
+                    SecurityUtils.loggedCliente().addItemCarrinho(itemCardapio);
+                }
+            }
         }
         Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
         model.addAttribute("itemsCarrinho", itemsCarrinho);
-
+        model.addAttribute("totalCarrinho", SecurityUtils.loggedCliente().totalCarrinho());
 
         return "carrinho";
     }
 
 
+
+    @GetMapping(path = "/carrinho/remove")
+    public String removeCarrinho(
+            @RequestParam(required = false) Integer itemCarrinhoId
+            ){
+        ItemCardapio itemCardapio = itemCardapioService.searchById(itemCarrinhoId);
+        SecurityUtils.loggedCliente().removeItemCarrinho(itemCardapio);
+
+        return "redirect:/cliente/carrinho";
+    }
 }

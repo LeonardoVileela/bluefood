@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 @Getter
@@ -41,12 +43,24 @@ public class Cliente extends Usuario {
         System.out.println();
     }
 
+    public void removeItemCarrinho(ItemCardapio itemCardapio){
+        this.carrinho.remove(itemCardapio);
+    }
+
     public void esvaziarCarrinho(){
         carrinho.clear();
     }
 
     public Map<ItemCardapio, Integer> getItemsCarrinho(){
         return this.carrinho;
+    }
+
+    public BigDecimal totalCarrinho(){
+        BigDecimal soma = BigDecimal.valueOf(0.00);
+        for (var car : this.carrinho.entrySet()) {
+            soma = soma.add(car.getKey().getPreco().multiply(BigDecimal.valueOf(car.getValue())));
+        }
+        return soma;
     }
 
     public boolean contain(ItemCardapio itemCardapio){
@@ -65,6 +79,17 @@ public class Cliente extends Usuario {
         for (var car : this.carrinho.entrySet()) {
             if (car.getKey().getId() == id){
                 car.setValue(car.getValue() + 1);
+            }
+        }
+
+    }
+
+    public void quitExisting(int id){
+        for (var car : this.carrinho.entrySet()) {
+            if (car.getKey().getId() == id){
+                if(car.getValue() != 1){
+                    car.setValue(car.getValue() - 1);
+                }
             }
         }
 

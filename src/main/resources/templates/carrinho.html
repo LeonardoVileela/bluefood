@@ -18,46 +18,59 @@
             crossorigin="anonymous"></script>
 
     <meta name="robots" content="noindex,follow" />
+
+
+    <style>
+      #add-button-center {
+        width: 300px;
+        padding-bottom: 30px;
+      }
+    </style>
   </head>
   <body>
+
+  <center>
+    <button th:onclick="'location.href=\'' + @{/cliente/home} + '\';'" id="add-button-center" class="btn btn-outline-primary" type="submit">CONTINUAR COMPRANDO</button>
+  </center>
     <div class="shopping-cart">
       <!-- Title -->
       <div class="title">
-        <span>Total: R$ 100.00</span>
+        <span th:text="'Total: R$ ' + ${totalCarrinho}"></span>
         <!-- <button class="btn btn-primary" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">Continuar comparando</button>-->
         <button style="width: 200px; padding-bottom: 30px; margin-left: 5px;" class="btn btn-outline-danger" type="submit">FINALIZAR COMPRA</button>
       </div>
 
       <!-- Product #1 -->
       <div th:each="instance : ${itemsCarrinho}">
-      <div class="item" >
-        <div class="buttons">
-          <span class="delete-btn"></span>
-          <span class="like-btn"></span>
-        </div>
+        <div class="item" >
+          <div class="buttons">
+            <span th:onclick="'location.href=\'' + @{/cliente/carrinho/remove?itemCarrinhoId=} + ${instance.key.getId()} + '\';'" class="delete-btn"></span>
+            <span class="like-btn"></span>
+          </div>
 
-        <div class="image">
-          <img style="width: 120px" th:src="@{/image/comida/} + ${instance.key.logotipo}" alt="" />
-        </div>
+          <div class="image">
+            <img style="width: 120px" th:src="@{/image/comida/} + ${instance.key.logotipo}" alt="" />
+          </div>
 
-        <div class="description">
-          <span th:text="${instance.key.getNome()}"></span>
-          <span th:text="${instance.key.getCategoria()}"></span>
-          <span th:text="${instance.key.getDescricao()}"></span>
-        </div>
+          <div class="description">
+            <span th:text="${instance.key.getNome()}"></span>
+            <span th:text="${instance.key.getCategoria()}"></span>
+            <span th:text="${instance.key.getDescricao()}"></span>
+          </div>
 
-        <div class="quantity">
-          <button class="plus-btn" type="button" name="button">
-            <img th:src="@{/carrinho/plus.svg}" alt="" />
-          </button>
-          <input type="text" name="name" th:value="${instance.value}">
-          <button class="minus-btn" type="button" name="button">
-            <img th:src="@{/carrinho/minus.svg}" alt="" />
-          </button>
-        </div>
+          <div class="quantity">
+            <button class="plus-btn" type="button" name="button">
+              <img th:src="@{/carrinho/plus.svg}" alt="" />
+            </button>
+            <span th:text="${instance.value}"></span>
+            <input hidden type="text" name="name" th:value="${instance.key.getId()}">
+            <button class="minus-btn" type="button" name="button">
+              <img th:src="@{/carrinho/minus.svg}" alt="" />
+            </button>
+          </div>
 
-        <div th:text="${instance.value * instance.key.getPreco()}" class="total-price">$549</div>
-      </div>
+          <div th:text="${instance.value * instance.key.getPreco()}" class="total-price">$549</div>
+        </div>
       </div>
     </div>
 
@@ -69,29 +82,20 @@
     		var $input = $this.closest('div').find('input');
     		var value = parseInt($input.val());
 
-    		if (value > 1) {
-    			value = value - 1;
-    		} else {
-    			value = 0;
-    		}
+        window.location.replace('http://' + window.location.host + '/cliente/carrinho?quant=minus&itemCarrinhoId=' + value);
 
-        $input.val(value);
 
-    	});
+      });
 
     	$('.plus-btn').on('click', function(e) {
     		e.preventDefault();
+
     		var $this = $(this);
     		var $input = $this.closest('div').find('input');
     		var value = parseInt($input.val());
 
-    		if (value < 100) {
-      		value = value + 1;
-    		} else {
-    			value =100;
-    		}
 
-    		$input.val(value);
+          window.location.replace('http://' + window.location.host + '/cliente/carrinho?quant=plus&itemCarrinhoId=' + value);
     	});
 
       $('.like-btn').on('click', function() {
