@@ -1,5 +1,6 @@
 package br.com.javafood.domain.pedido;
 
+import br.com.javafood.domain.cliente.Cliente;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,14 @@ public class Pedido {
     @NotNull(message = "A data não pode ser vazio")
     private LocalDate date;
 
-    @OneToMany(mappedBy = "itemCardapio")
+    @OneToMany(mappedBy = "itemCardapio", fetch = FetchType.EAGER)
     private Set<PedidoItemCardapio> pedidoItemCardapio = new HashSet<PedidoItemCardapio>();
+
+    @ManyToOne
+    @NotNull
+    private Cliente cliente;
+
+
+
+
 }

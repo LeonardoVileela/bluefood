@@ -64,37 +64,27 @@
         <legend>Filtros</legend>
         <select onchange="selectFilterChange()" id="selectFilter">
             <option value="">-</option>
-            <option id="entrega" value="entrega">Entrega Grátis</option>
-            <option id="maiorTaxa" value="maiorTaxa">Maior Taxa</option>
-            <option id="menorTaxa" value="menorTaxa">Menor Taxa</option>
-            <option id="maiorTempo" value="maiorTempo">Maior Tempo</option>
-            <option id="menorTempo" value="menorTempo">Menor Tempo</option>
+            <option id="pendente" value="true">Em Produção</option>
+            <option id="finalizado" value="false">Finalizados</option>
         </select>
     </fieldset>
 </div>
 <br>
-
 <center>
     <div class="container">
         <div class="row">
-            <div class="col-sm banner" th:each="restaurante : ${restaurantes}">
-                <div class="card" style="margin: 10px !important; width: 18rem;">
-                    <a th:href="@{/cliente/restaurante} + '?restautenteId=' + ${restaurante.id}"><img
-                            style="height: 286px;" th:src="@{/image/logotipo/} + ${restaurante.logotipo}" alt="..."></a>
+            <div style="margin-bottom: 10px" class="col-sm-3 banner" th:each="pedido : ${pedidos}">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <span th:text="${'CÓDIGO DO PEDIDO: ' + pedido.getId()}"></span>
+                    </div>
                     <div class="card-body">
-                        <h5 th:text="${restaurante.nome}" class="card-title"></h5>
-                        <p class="card-text">
-                            <span th:text="${restaurante.getCategoriasAsText()}"></span>
-                            <br>
-                            <br>
-                            <span th:text="'Tempo médio de entrega: '+ ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span>
-                            <br>
-                            <span th:text="'Taxa de entrega: R$ ' + ${restaurante.taxaEntrega}"></span>
-                            <br>
-                        </p>
-                        <a th:href="@{/cliente/restaurante} + '?restautenteId=' + ${restaurante.id}"
-                           class="btn btn-danger">Saiba
-                            Mais</a>
+                        <h5 th:text="${'Total: R$ ' + pedido.getTotal()}" class="card-title"></h5>
+                        <p class="card-text">Pedido em produção</p>
+                        <a th:onclick="'location.href=\'' + @{/cliente/pedido} + '?id='+ ${pedido.getId()}  +'\';'" class="btn btn-danger">Saiba mais</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <span th:text="${pedido.getDate()}"></span>
                     </div>
                 </div>
             </div>
@@ -125,11 +115,11 @@
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
 
-        if (params.filter) {
+        if (params.pendente) {
             if (valueFilter !== '') {
                 var queryParams = new URLSearchParams(window.location.search);
 
-                queryParams.set("filter", valueFilter);
+                queryParams.set("pendente", valueFilter);
 
                 history.pushState(null, null, "?" + queryParams.toString());
 
@@ -137,13 +127,10 @@
             }
 
         } else {
-            window.location.href = window.location.href + '&filter=' + valueFilter
+            window.location.href = window.location.href + '?pendente=' + valueFilter
         }
 
     }
-
-
-    //http://localhost:8080/cliente/searchCategory?categoria=4&myVar=awesomeValue
 </script>
 
 </body>

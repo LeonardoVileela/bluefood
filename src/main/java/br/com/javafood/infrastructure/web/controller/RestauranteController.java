@@ -3,6 +3,7 @@ package br.com.javafood.infrastructure.web.controller;
 import br.com.javafood.application.ItemCardapioService;
 import br.com.javafood.application.RestauranteService;
 import br.com.javafood.application.ValidationException;
+import br.com.javafood.domain.pedido.Pedido;
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.pedido.PedidoItemCardapio;
 import br.com.javafood.util.SecurityUtils;
@@ -10,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -79,13 +77,35 @@ public class RestauranteController {
 
 
     @GetMapping(path = "/pedido/pendentes")
-    public String teste(){
-      List<PedidoItemCardapio> itemsPendentes = restauranteService.findPedidos(SecurityUtils.loggedRestaurante().getId());
+    public String pedidosPendentes(
+            Model model
+    ){
+      List<Pedido> pedidos = restauranteService.findPedidos(SecurityUtils.loggedRestaurante().getId());
+        model.addAttribute("pedidos", pedidos);
 
-      System.out.println(itemsPendentes);
-
-      //TODO terminar pagina de mostrar pedidos pendentes
-      return "redirect:/restaurante/home";
+      return "restaurante-pedidos-pendentes";
     }
+
+    @GetMapping(path = "/pedido/pendentes/items")
+    public String pedidosPendentesItems(
+            @RequestParam(required = true) Integer pedidoId,
+            Model model
+    ){
+        List<PedidoItemCardapio> itemsPendentes = restauranteService.findItemsPedidosRestaurante(SecurityUtils.loggedRestaurante().getId(), pedidoId );
+        model.addAttribute("items", itemsPendentes);
+
+
+        return "restaurante-pedidos-pendentes-items";
+    }
+
+    /*@GetMapping(path = "/pedido/finalizar")
+    public String finalizarPedido(
+            Model model
+    ){
+        List<PedidoItemCardapio> itemsPendentes = restauranteService.findPedidos(SecurityUtils.loggedRestaurante().getId());
+        model.addAttribute("items", itemsPendentes);
+
+        return "restaurante-pedidos-pendentes";
+    }*/
 
 }

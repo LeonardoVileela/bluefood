@@ -2,6 +2,7 @@ package br.com.javafood.application;
 
 import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
+import br.com.javafood.domain.pedido.Pedido;
 import br.com.javafood.domain.restaurante.Restaurante;
 import br.com.javafood.domain.restaurante.RestauranteRepository;
 import br.com.javafood.domain.pedido.PedidoItemCardapio;
@@ -131,7 +132,15 @@ public class RestauranteService {
     }
 
 
-    public List<PedidoItemCardapio> findPedidos(Integer id){
+    public List<Pedido> findPedidos(Integer id){
         return pedidoItemCardapioRepository.findPedidos(id);
+    }
+
+    public List<PedidoItemCardapio> findItemsPedidosRestaurante(Integer restauranteId, Integer pedidoId){
+        return pedidoItemCardapioRepository.findItemsPedidosRestaurante(restauranteId,pedidoId);
+    }
+
+    public void finalizarPedido(Integer id){
+
     }
 }

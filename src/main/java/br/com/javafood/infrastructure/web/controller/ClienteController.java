@@ -3,6 +3,8 @@ package br.com.javafood.infrastructure.web.controller;
 import br.com.javafood.application.*;
 import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
+import br.com.javafood.domain.pedido.Pedido;
+import br.com.javafood.domain.pedido.PedidoItemCardapio;
 import br.com.javafood.domain.restaurante.CategoriaRestaurante;
 import br.com.javafood.domain.restaurante.CategoriaRestauranteRepository;
 import br.com.javafood.domain.restaurante.ItemCardapio;
@@ -178,12 +180,46 @@ public class ClienteController {
     }
 
 
-    @GetMapping(path = "/carrinho/save")
+    @PostMapping(path = "/pagamento/save")
     public String saveCarrinho(
     ){
 
         Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
-        pedidoService.save(itemsCarrinho);
-        return "redirect:/cliente/home";
+        Integer id = pedidoService.save(itemsCarrinho);
+        return "redirect:/cliente/pedido?id=" + id;
+    }
+
+
+    @GetMapping(path = "/pagamento")
+    public String pagamento(
+    ){
+        return "pagamento";
+    }
+
+    @GetMapping(path = "/pedidos")
+    public String pedidos(
+            Model model,
+            @RequestParam(required = true) Boolean pendente
+    ){
+        List<Pedido> pedidos = pedidoService.pedidosCliente(SecurityUtils.loggedCliente().getId(), pendente);
+        model.addAttribute("pedidos", pedidos);
+
+        List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
+        model.addAttribute("categorias", categorias);
+        return "cliente-pedidos";
+    }
+
+
+    @GetMapping(path = "/pedido")
+    public String pedido(
+            Model model,
+            @RequestParam(required = true) Integer id
+    ){
+        List<PedidoItemCardapio> items = pedidoService.pedidoCliente(id);
+        model.addAttribute("items", items);
+
+        List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
+        model.addAttribute("categorias", categorias);
+        return "cliente-pedido";
     }
 }

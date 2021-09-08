@@ -51,50 +51,36 @@
             </ul>
             <form class="d-flex" th:action="@{/cliente/search}" method="GET">
                 <!-- <img style="margin-right: 10px" th:src="@{/imagesIfood/logo-java.svg}" alt="" width="50" />-->
-                 <input name="busca" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-                 <button class="btn btn-outline-danger" type="submit">BUSCAR</button>
-             </form>
-         </div>
-     </div>
- </nav>
+                <input name="busca" class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="btn btn-outline-danger" type="submit">BUSCAR</button>
+            </form>
+        </div>
+    </div>
+</nav>
 
-<div>
-    <h1 class="titleResultado">Resultados</h1>
-    <fieldset class="filtro">
-        <legend>Filtros</legend>
-        <select onchange="selectFilterChange()" id="selectFilter">
-            <option value="">-</option>
-            <option id="entrega" value="entrega">Entrega Grátis</option>
-            <option id="maiorTaxa" value="maiorTaxa">Maior Taxa</option>
-            <option id="menorTaxa" value="menorTaxa">Menor Taxa</option>
-            <option id="maiorTempo" value="maiorTempo">Maior Tempo</option>
-            <option id="menorTempo" value="menorTempo">Menor Tempo</option>
-        </select>
-    </fieldset>
-</div>
-<br>
+
+<h1 style="margin-bottom: 40px" class="titleResultado">Items</h1>
+
 
 <center>
     <div class="container">
         <div class="row">
-            <div class="col-sm banner" th:each="restaurante : ${restaurantes}">
+            <div class="col-sm banner" th:each="item : ${items}">
                 <div class="card" style="margin: 10px !important; width: 18rem;">
-                    <a th:href="@{/cliente/restaurante} + '?restautenteId=' + ${restaurante.id}"><img
-                            style="height: 286px;" th:src="@{/image/logotipo/} + ${restaurante.logotipo}" alt="..."></a>
+                    <img style="height: 286px;" th:src="@{/image/comida/} + ${item.getItemCardapio().getLogotipo()}" alt="...">
                     <div class="card-body">
-                        <h5 th:text="${restaurante.nome}" class="card-title"></h5>
+                        <h5 th:text="${item.getItemCardapio().getNome()}" class="card-title"></h5>
                         <p class="card-text">
-                            <span th:text="${restaurante.getCategoriasAsText()}"></span>
+                            <span th:text="${item.getItemCardapio().getDescricao()}"></span>
                             <br>
+                            <span th:text="'R$ ' + ${item.getItemCardapio().getPreco()}"></span>
                             <br>
-                            <span th:text="'Tempo médio de entrega: '+ ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span>
+                            <span th:text="'Status: ' + ${item.getStatus()}"></span>
                             <br>
-                            <span th:text="'Taxa de entrega: R$ ' + ${restaurante.taxaEntrega}"></span>
+                            <span th:text="'Quantidade ' + ${item.getQuantidade()}"></span>
+                            <br>
                             <br>
                         </p>
-                        <a th:href="@{/cliente/restaurante} + '?restautenteId=' + ${restaurante.id}"
-                           class="btn btn-danger">Saiba
-                            Mais</a>
                     </div>
                 </div>
             </div>
@@ -102,49 +88,13 @@
     </div>
 </center>
 
+
+
 <div class="footer">
     <img th:src="@{/imagesIfood/logofooter.svg}" alt=""/>
     <span>© Copyright 2020 - iFood <br/>Todos os direitos reservados</span>
 </div>
 
-
-<script>
-    valueFilter = document.getElementById("selectFilter").value;
-
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-
-    if (params.filter) {
-        document.getElementById(params.filter).selected = 'selected';
-    }
-
-
-    function selectFilterChange() {
-        valueFilter = document.getElementById("selectFilter").value;
-
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-
-        if (params.filter) {
-            if (valueFilter !== '') {
-                var queryParams = new URLSearchParams(window.location.search);
-
-                queryParams.set("filter", valueFilter);
-
-                history.pushState(null, null, "?" + queryParams.toString());
-
-                window.location.reload(false);
-            }
-
-        } else {
-            window.location.href = window.location.href + '&filter=' + valueFilter
-        }
-
-    }
-
-
-    //http://localhost:8080/cliente/searchCategory?categoria=4&myVar=awesomeValue
-</script>
 
 </body>
 
