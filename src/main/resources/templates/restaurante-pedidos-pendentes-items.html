@@ -18,7 +18,10 @@
 </head>
 
 <body style="background-color: white;">
-
+<center>
+<a style="margin-top: 10px" th:href="@{/restaurante/pedido/finalizar} + '?pedidoId=' + ${pedidoId}"
+   class="btn btn-danger">Finalizar</a>
+</center>
 <center>
     <div class="container">
         <div class="row">
@@ -33,8 +36,6 @@
                             <span th:text="'Quantidade ' + ${item.getQuantidade()}"></span>
                             <br>
                         </p>
-                        <a th:href="@{/restaurante/pedido/finalizar} + '?itemId=' + ${item.getItemCardapio().getId()}"
-                           class="btn btn-danger">Finalizar</a>
                     </div>
                 </div>
             </div>

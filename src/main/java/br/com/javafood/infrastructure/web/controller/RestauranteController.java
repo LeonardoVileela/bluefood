@@ -94,18 +94,20 @@ public class RestauranteController {
         List<PedidoItemCardapio> itemsPendentes = restauranteService.findItemsPedidosRestaurante(SecurityUtils.loggedRestaurante().getId(), pedidoId );
         model.addAttribute("items", itemsPendentes);
 
+        model.addAttribute("pedidoId", pedidoId);
+
 
         return "restaurante-pedidos-pendentes-items";
     }
 
-    /*@GetMapping(path = "/pedido/finalizar")
+    @GetMapping(path = "/pedido/finalizar")
     public String finalizarPedido(
-            Model model
+            Model model,
+            @RequestParam(required = true) Integer pedidoId
     ){
-        List<PedidoItemCardapio> itemsPendentes = restauranteService.findPedidos(SecurityUtils.loggedRestaurante().getId());
-        model.addAttribute("items", itemsPendentes);
+        restauranteService.finalizarPedido(pedidoId);
 
-        return "restaurante-pedidos-pendentes";
-    }*/
+        return "redirect:/restaurante/pedido/pendentes";
+    }
 
 }

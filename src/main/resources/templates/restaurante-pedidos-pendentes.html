@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <h5 th:text="${'Total: R$ ' + pedido.getTotal()}" class="card-title"></h5>
                         <p class="card-text">Pedido em produção</p>
-                        <a th:onclick="'location.href=\'' + @{/pedido/pendente/items} + '?id='+ ${pedido.getId()}  +'\';'" class="btn btn-danger">Saiba mais</a>
+                        <a th:onclick="'location.href=\'' + @{/restaurante/pedido/pendentes/items} + '?pedidoId='+ ${pedido.getId()}  +'\';'" class="btn btn-danger">Saiba mais</a>
                     </div>
                     <div class="card-footer text-muted">
                         <span th:text="${pedido.getDate()}"></span>

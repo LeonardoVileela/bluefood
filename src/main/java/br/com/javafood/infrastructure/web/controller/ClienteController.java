@@ -186,6 +186,7 @@ public class ClienteController {
 
         Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
         Integer id = pedidoService.save(itemsCarrinho);
+        SecurityUtils.loggedCliente().esvaziarCarrinho();
         return "redirect:/cliente/pedido?id=" + id;
     }
 
@@ -203,6 +204,12 @@ public class ClienteController {
     ){
         List<Pedido> pedidos = pedidoService.pedidosCliente(SecurityUtils.loggedCliente().getId(), pendente);
         model.addAttribute("pedidos", pedidos);
+
+        if(pendente){
+            model.addAttribute("status", "Em Produção");
+        }else{
+            model.addAttribute("status", "Pedido Finalizado");
+        }
 
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
         model.addAttribute("categorias", categorias);

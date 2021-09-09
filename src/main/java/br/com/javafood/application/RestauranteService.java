@@ -136,11 +136,16 @@ public class RestauranteService {
         return pedidoItemCardapioRepository.findPedidos(id);
     }
 
+    public void finalizarPedido(Integer id){
+        List<PedidoItemCardapio> finalizar = pedidoItemCardapioRepository.findPedido(id);
+        for (PedidoItemCardapio item: finalizar) {
+            item.setStatus("Finalizado");
+            pedidoItemCardapioRepository.save(item);
+        }
+    }
+
     public List<PedidoItemCardapio> findItemsPedidosRestaurante(Integer restauranteId, Integer pedidoId){
         return pedidoItemCardapioRepository.findItemsPedidosRestaurante(restauranteId,pedidoId);
     }
 
-    public void finalizarPedido(Integer id){
-
-    }
 }

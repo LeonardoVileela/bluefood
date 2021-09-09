@@ -64,7 +64,7 @@ public class ItemCardapio implements Serializable {
     @UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo não é um arquivo de imagem válido")
     private transient MultipartFile imagemFile;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
     private Set<PedidoItemCardapio> pedido = new HashSet<PedidoItemCardapio>();
 
 

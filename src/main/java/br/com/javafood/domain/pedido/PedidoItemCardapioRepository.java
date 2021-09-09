@@ -19,6 +19,8 @@ public interface PedidoItemCardapioRepository extends JpaRepository<PedidoItemCa
     @Query("SELECT ic FROM PedidoItemCardapio ic WHERE ic.pedido.id = ?1" )
     public List<PedidoItemCardapio> findItemsPedidoCliente(Integer pedidoId);
 
-    @Query("SELECT ic FROM PedidoItemCardapio ic WHERE ic.itemCardapio.id = ?1" )
+    @Query("SELECT DISTINCT ic FROM PedidoItemCardapio ic WHERE ic.pedido.id = ?1" )
     public List<PedidoItemCardapio> findPedido(Integer pedidoId);
+
+
 }
