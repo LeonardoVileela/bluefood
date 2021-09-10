@@ -1,11 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/javafood?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
-    username: root
-    password:
+    url: postgres://jwuudspecotjxf:9764deff0487e521e4cc16f2455926e6130e804ba65a97c2b1f191d44b0cfe0e@ec2-44-193-150-214.compute-1.amazonaws.com:5432/dcpmc179vndp35
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     open-in-view: false
     properties:
       hibernate:

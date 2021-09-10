@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.profiles.activeprod -jar build/libs/bluefood-0.0.1-SNAPSHOT-plain.jar
