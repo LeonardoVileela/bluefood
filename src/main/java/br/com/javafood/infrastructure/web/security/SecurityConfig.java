@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/images/**","/css/**", "/js/**", "/public", "/sbpay", "/loginPlugins/**").permitAll() //autoriza acesso a todas essas urls
+                .antMatchers("/images/**","/css/**", "/js/**", "/public", "/sbpay", "/loginPlugins/**" , "/public/cliente/**" , "/public/restaurante/**").permitAll() //autoriza acesso a todas essas urls
                 .antMatchers("/cliente/**").hasRole(Role.CLIENTE.toString()) //no caso de cliente tem que ter o role cliente
                 .antMatchers("/restaurante/**").hasRole(Role.RESTAURANTE.toString()) // no caso de restaurante tem que ter o role restaurante
                 .anyRequest().authenticated() //todas as outras necessario autenticação
@@ -35,12 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll();// qualquer pessoa pode acessar a url de logout
 
         httpSecurity.headers().frameOptions().sameOrigin();//aceita iframe da mesma origem
-
-        httpSecurity.authorizeRequests().antMatchers("/public/cliente/new").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/public/cliente/save").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/public/restaurante/new").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/public/restaurante/save").permitAll();
-    }
 
     /*@Override
     public void configure(WebSecurity web) throws Exception {
