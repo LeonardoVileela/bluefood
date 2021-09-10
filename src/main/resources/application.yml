@@ -1,13 +1,11 @@
 spring:
   datasource:
     url: postgres://jwuudspecotjxf:9764deff0487e521e4cc16f2455926e6130e804ba65a97c2b1f191d44b0cfe0e@ec2-44-193-150-214.compute-1.amazonaws.com:5432/dcpmc179vndp35
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create
     open-in-view: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
   servlet:
     multipart:
       max-file-size: 1MB
