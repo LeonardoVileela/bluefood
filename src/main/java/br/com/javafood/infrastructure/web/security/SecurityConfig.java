@@ -36,9 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.headers().frameOptions().sameOrigin();//aceita iframe da mesma origem
 
-        httpSecurity.authorizeRequests().antMatchers("/public/cliente/*").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/public/restaurante/*").permitAll();
-
+        httpSecurity.authorizeRequests().antMatchers("/public/cliente/new").permitAll();
+        httpSecurity.authorizeRequests().antMatchers("/public/cliente/save").permitAll();
+        httpSecurity.authorizeRequests().antMatchers("/public/restaurante/new").permitAll();
+        httpSecurity.authorizeRequests().antMatchers("/public/restaurante/save").permitAll();
     }
 
     /*@Override
