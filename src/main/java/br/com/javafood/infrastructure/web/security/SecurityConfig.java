@@ -17,22 +17,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception{
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/images/**","/css/**", "/js/**", "/public", "/sbpay", "/loginPlugins/**" , "/public/cliente/**" , "/public/restaurante/**").permitAll() //autoriza acesso a todas essas urls
+                .antMatchers("/images/**", "/css/**", "/js/**", "/public", "/sbpay", "/loginPlugins/**", "/public/cliente/**", "/public/restaurante/**").permitAll() //autoriza acesso a todas essas urls
                 .antMatchers("/cliente/**").hasRole(Role.CLIENTE.toString()) //no caso de cliente tem que ter o role cliente
                 .antMatchers("/restaurante/**").hasRole(Role.RESTAURANTE.toString()) // no caso de restaurante tem que ter o role restaurante
                 .anyRequest().authenticated() //todas as outras necessario autenticação
                 .and()
                 .formLogin()//a forma de autenicação será por login
-                    .loginPage("/login")// url do login
-                    .failureUrl("/login-error")//url caso o login de problema
-                    .successHandler(authenticationSuccessHandler())//objeto que será chamado quando o login der certo
-                    .permitAll()// qualquer pessoa pode acessar a url de login
+                .loginPage("/login")// url do login
+                .failureUrl("/login-error")//url caso o login de problema
+                .successHandler(authenticationSuccessHandler())//objeto que será chamado quando o login der certo
+                .permitAll()// qualquer pessoa pode acessar a url de login
                 .and()
-                    .logout().logoutUrl("/logout")//url de logout
-                    .permitAll();// qualquer pessoa pode acessar a url de logout
+                .logout().logoutUrl("/logout")//url de logout
+                .permitAll();// qualquer pessoa pode acessar a url de logout
 
         httpSecurity.headers().frameOptions().sameOrigin();//aceita iframe da mesma origem
 
@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST, "/public/cliente/save");
     }*/
 
-
+    }
 
 
 }
