@@ -35,16 +35,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll();// qualquer pessoa pode acessar a url de logout
 
         httpSecurity.headers().frameOptions().sameOrigin();//aceita iframe da mesma origem
+
+        httpSecurity.authorizeRequests().antMatchers("/public/cliente/*").permitAll();
+        httpSecurity.authorizeRequests().antMatchers("/public/restaurante/*").permitAll();
+
     }
 
-    @Override
+    /*@Override
     public void configure(WebSecurity web) throws Exception {
         //autorizar cadastro de usuario
-        web.ignoring().antMatchers(HttpMethod.GET, "/public/cliente/new");
+        web.ignoring().antMatchers(HttpMethod.GET, "/public/cliente/*new");
         web.ignoring().antMatchers(HttpMethod.GET, "/public/restaurante/new");
         web.ignoring().antMatchers(HttpMethod.POST, "/public/restaurante/save");
         web.ignoring().antMatchers(HttpMethod.POST, "/public/cliente/save");
-    }
+    }*/
 
 
 
