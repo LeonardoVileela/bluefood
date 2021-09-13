@@ -26,8 +26,7 @@ import java.util.Set;
 public class Restaurante extends Usuario{
 
     @NotBlank(message = "O CNPJ não pode ser vazio")
-    @Pattern(regexp = "[0-9]{14}", message = "O CNPJ possui formato inválido")
-    @Column(length = 14, nullable = false) //tamanho do campo no banco
+    @Column(length = 18, nullable = false) //tamanho do campo no banco
     private String cnpj;
 
     @Size(max = 80)

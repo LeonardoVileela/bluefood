@@ -10,8 +10,9 @@
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
-	<script type="text/javascript" th:src="@{/js/script.js}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.60/inputmask/jquery.inputmask.js"></script>
+
 	<script>
 		function goBack() {
 			window.history.back();
@@ -48,7 +49,7 @@
 					<br th:if="${#fields.hasErrors('nome')}">
 
 					<label for="cnpj">CNPJ: </label><br>
-					<input th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : ''" th:field="*{cnpj}"  type="text" id="cnpj" name="cnpj" placeholder="CNPJ..."><br><br>
+					<input inputmode="numeric" class="cnpj" th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : ''" th:field="*{cnpj}"  type="text" id="cnpj" name="cnpj" placeholder="CNPJ..."><br><br>
 
 					<div th:if="${#fields.hasErrors('cnpj')}" class="mensagemDeErro">
 						<span class="spanError"></span>
@@ -66,7 +67,7 @@
 					<br th:if="${#fields.hasErrors('email')}">
 
 					<label for="telefone">Telefone: </label><br>
-					<input th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''" th:field="*{telefone}"  type="text" id="telefone" name="telefone" placeholder="Telefone..."><br><br>
+					<input inputmode="numeric" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''" th:field="*{telefone}"  type="text" id="telefone" name="telefone" placeholder="Telefone..."><br><br>
 
 					<div th:if="${#fields.hasErrors('telefone')}" class="mensagemDeErro">
 						<span class="spanError"></span>
@@ -75,7 +76,7 @@
 					<br th:if="${#fields.hasErrors('telefone')}">
 
 					<label for="taxaEntrega">Taxa de entrega: </label><br>
-					<input type="text" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de Entrega..." th:field="*{taxaEntrega}" th:classappend="${#fields.hasErrors('taxaEntrega')} ? 'inputError' : ''" /><br>
+					<input inputmode="numeric" type="text" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de Entrega..." th:field="*{taxaEntrega}" th:classappend="${#fields.hasErrors('taxaEntrega')} ? 'inputError' : ''" /><br>
 
 					<div th:if="${#fields.hasErrors('taxaEntrega')}" class="mensagemDeErro">
 						<span class="spanError"></span>
@@ -84,7 +85,7 @@
 					<br th:if="${#fields.hasErrors('taxaEntrega')}">
 
 					<label for="tempoEntregaBase">Tempo de entrega (mín.): </label><br />
-					<input type="text" id="tempoEntregaBase" name="tempoEntregaBase" placeholder="Tempo de Entrega..." th:field="*{tempoEntregaBase}" th:classappend="${#fields.hasErrors('tempoEntregaBase')} ? 'inputError' : ''" /><br>
+					<input inputmode="numeric" type="text" id="tempoEntregaBase" name="tempoEntregaBase" placeholder="Tempo de Entrega..." th:field="*{tempoEntregaBase}" th:classappend="${#fields.hasErrors('tempoEntregaBase')} ? 'inputError' : ''" /><br>
 
 					<div th:if="${#fields.hasErrors('tempoEntregaBase')}" class="mensagemDeErro">
 						<span class="spanError"></span>
@@ -138,6 +139,14 @@
 
 		<script>
 
+			$("#cnpj").inputmask("99.999.999/9999-99");
+
+			$('#telefone').inputmask('99999999999');
+
+
+
+
+
 			const urlSearchParams = new URLSearchParams(window.location.search);
 			const params = Object.fromEntries(urlSearchParams.entries());
 
@@ -158,8 +167,8 @@
 				)
 
 			}
-		</script>
 
+		</script>
 
 
 
