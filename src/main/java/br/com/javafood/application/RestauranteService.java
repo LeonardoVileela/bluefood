@@ -3,6 +3,8 @@ package br.com.javafood.application;
 import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
 import br.com.javafood.domain.pedido.Pedido;
+import br.com.javafood.domain.restaurante.ItemCardapio;
+import br.com.javafood.domain.restaurante.ItemCardapioRepository;
 import br.com.javafood.domain.restaurante.Restaurante;
 import br.com.javafood.domain.restaurante.RestauranteRepository;
 import br.com.javafood.domain.pedido.PedidoItemCardapio;
@@ -30,6 +32,9 @@ public class RestauranteService {
 
     @Autowired
     private PedidoItemCardapioRepository pedidoItemCardapioRepository;
+
+    @Autowired
+    private ItemCardapioRepository itemCardapioRepository;
 
     //injeção de dependencias de imagem service
     @Autowired
@@ -146,6 +151,14 @@ public class RestauranteService {
 
     public List<PedidoItemCardapio> findItemsPedidosRestaurante(Integer restauranteId, Integer pedidoId){
         return pedidoItemCardapioRepository.findItemsPedidosRestaurante(restauranteId,pedidoId);
+    }
+
+    public List<ItemCardapio> listItemsRestaurante(Integer restauranteIdId){
+        return itemCardapioRepository.listItems(restauranteIdId);
+    }
+
+    public List<PedidoItemCardapio> listPedidosRestaurante(Integer restauranteIdId){
+        return pedidoItemCardapioRepository.listPedidosItems(restauranteIdId);
     }
 
 }

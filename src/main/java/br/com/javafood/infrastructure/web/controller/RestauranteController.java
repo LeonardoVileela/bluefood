@@ -110,4 +110,22 @@ public class RestauranteController {
         return "redirect:/restaurante/pedido/pendentes";
     }
 
+    @GetMapping(path = "/items/list")
+    public String todosItemsCardapio(
+            Model model
+    ){
+        model.addAttribute("itemsCardapio", restauranteService.listItemsRestaurante(SecurityUtils.loggedRestaurante().getId()));
+
+        return "restaurante-items-cardapio";
+    }
+
+    @GetMapping(path = "/pedidos/list")
+    public String todosPedidos(
+            Model model
+    ){
+        model.addAttribute("pedidos", restauranteService.listPedidosRestaurante(SecurityUtils.loggedRestaurante().getId()));
+
+        return "restaurante-pedidos-todos";
+    }
+
 }

@@ -23,4 +23,5 @@ bluefood:
       #username: root
       #password:
 
+#      driver-class-name: org.postgresql.Driver
 
