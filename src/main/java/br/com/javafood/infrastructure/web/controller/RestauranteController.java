@@ -119,6 +119,15 @@ public class RestauranteController {
         return "restaurante-items-cardapio";
     }
 
+    @GetMapping(path = "/items/list/desativados")
+    public String todosItemsCardapioDesativados(
+            Model model
+    ){
+        model.addAttribute("itemsCardapio", restauranteService.listItemsRestauranteDesativados(SecurityUtils.loggedRestaurante().getId()));
+
+        return "restaurante-items-cardapio-desativados";
+    }
+
     @GetMapping(path = "/pedidos/list")
     public String todosPedidos(
             Model model
@@ -126,6 +135,26 @@ public class RestauranteController {
         model.addAttribute("pedidos", restauranteService.listPedidosRestaurante(SecurityUtils.loggedRestaurante().getId()));
 
         return "restaurante-pedidos-todos";
+    }
+
+    @GetMapping(path = "/itemcardapio/desativar")
+    public String desativarItemCardapio(
+            @RequestParam(required = true) Integer id
+    ){
+
+        restauranteService.desativarItemCardapioService(id);
+
+        return "redirect:/restaurante/items/list";
+    }
+
+    @GetMapping(path = "/itemcardapio/ativar")
+    public String ativarItemCardapio(
+            @RequestParam(required = true) Integer id
+    ){
+
+        restauranteService.ativarItemCardapioService(id);
+
+        return "redirect:/restaurante/items/list";
     }
 
 }

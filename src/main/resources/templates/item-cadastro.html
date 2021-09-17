@@ -17,9 +17,13 @@
   <link rel="stylesheet" th:href="@{/prototipo/plugins/fontawesome-free/css/all.min.css}" >
   <!-- Theme style -->
   <link rel="stylesheet" th:href="@{/prototipo/dist/css/adminlte.min.css}" >
+  <!-- Toastr -->
+  <link rel="stylesheet" th:href="@{/prototipo/plugins/toastr/toastr.min.css}" >
+
 </head>
 
 <body>
+
 
   <section class="content-header">
     <div class="container-fluid">
@@ -27,7 +31,7 @@
     </div><!-- /.container-fluid -->
   </section>
 
-  <form th:action="@{/restaurante/item/save}" method="POST" th:object="${itemCardapio}" enctype="multipart/form-data">
+  <form id="formItem" th:action="@{/restaurante/item/save}" method="POST" th:object="${itemCardapio}" enctype="multipart/form-data">
 
   <!-- Main content -->
   <section class="content">
@@ -36,7 +40,7 @@
 
         <!-- right column -->
         <div class="col-md-12">
-          <div class="card card-danger">
+          <div class="card">
             <div class="card-header">
               <h3 class="card-title">Adicionar Item</h3>
             </div>
@@ -97,14 +101,14 @@
   </section>
   <!-- /.content -->
   <div style="text-align: center;">
-    <button style="max-width: 200px;" type="submit" class="btn-lg btn-danger">Cadastrar</button>
+    <button style="max-width: 200px;" type="button" onclick="submitForm()" class="btn-lg btn-danger">Cadastrar</button>
   </div>
 
   </form>
 
 
   <!-- jQuery -->
-  <script th:src="@{/prototipo/plugins/jquery/jquery.min.js}" ></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script th:src="@{/prototipo/plugins/bootstrap/js/bootstrap.bundle.min.js}" ></script>
   <!-- bs-custom-file-input -->
@@ -114,11 +118,49 @@
   <!-- AdminLTE for demo purposes -->
   <script th:src="@{/prototipo/dist/js/demo.js}"></script>
   <!-- Page specific script -->
-  <script>
-    $(function () {
-      bsCustomFileInput.init();
-    });
-  </script>
+
+  <!-- Toastr -->
+  <script th:src="@{/prototipo/plugins/toastr/toastr.min.js}"></script>
+
+<script>
+
+  function submitForm() {
+    var nome = document.getElementById("nome").value
+    var categoria = document.getElementById("categoria").value
+    var descricao = document.getElementById("descricao").value
+    var preco = document.getElementById("preco").value
+    var logotipo = document.getElementById("logotipo").value
+
+    console.log(logotipo)
+
+    if (nome == '') {
+
+      toastr.error('O nome do item não pode ser vazio')
+
+    } else if (categoria == ''){
+
+      toastr.error('A categoria não pode ser vazia')
+
+    } else if(descricao == ''){
+
+      toastr.error('A descrição não pode ser vazia')
+
+    } else if ( preco == ''){
+
+      toastr.error('O preço não pode ser vazio')
+
+    } else if (logotipo == ''){
+      toastr.error('A imagem do item é obrigatória')
+    } else{
+     // document.getElementById("formItem").submit();
+    }
+
+
+  }
+
+</script>
+
+
 </body>
 
 </html>

@@ -47,6 +47,8 @@ public class ItemCardapio implements Serializable {
     @Size(max = 80)
     private String descricao;
 
+    private Boolean ativo = true;
+
     @Size(max = 80)
     private String logotipo;
 

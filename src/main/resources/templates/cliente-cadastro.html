@@ -10,9 +10,9 @@
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
-    <script type="text/javascript" th:src="@{/js/script.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.60/inputmask/jquery.inputmask.js">
+
     <script>
         function goBack() {
             window.history.back();
@@ -27,120 +27,220 @@
 <body>
 
 
-        <div>
-            <h1>Cadastro de Cliente</h1>
+<div>
+    <h1>Cadastro de Cliente</h1>
 
-            <div id="sucesso">
+    <div id="sucesso">
+
+    </div>
+
+    <iframe name="votar" style="display:none;"></iframe>
+    <form id="formCliente" th:action="${editMode} ? @{/cliente/save} : @{/public/cliente/save}" method="POST"
+          th:object="${cliente}">
+        <fieldset>
+
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+
+            <label for="nome">Nome: </label><br>
+            <input type="text" id="nome" name="nome"
+                   placeholder="Nome..." th:field="*{nome}"><br>
+
+            <div id="nomeAlert">
 
             </div>
 
-            <iframe name="votar" style="display:none;"></iframe>
-            <form th:action="${editMode} ? @{/cliente/save} : @{/public/cliente/save}" method="POST" th:object="${cliente}">
-                <fieldset>
+            <label for="cpf">CPF: </label><br>
+            <input inputmode="numeric"  type="text"
+                   id="cpf" name="cpf" placeholder="CPF..." th:field="*{cpf}"><br>
 
-                    <input type="hidden" id="id" name="id" th:field="*{id}">
+            <div id="cpfAlert">
 
-                    <label for="nome">Nome: </label><br>
-                    <input th:classappend="${#fields.hasErrors('nome')} ? 'inputError' : ''" type="text" id="nome" name="nome" placeholder="Nome..." th:field="*{nome}"><br>
-
-                    <div th:if="${#fields.hasErrors('nome')}" class="mensagemDeErro">
-                        <span class="spanError"></span>
-                        <span th:errors="*{nome}" class="textError"></span>
-                    </div>
-                    <br th:if="${#fields.hasErrors('nome')}">
-
-                    <label for="cpf">CPF: </label><br>
-                    <input inputmode="numeric" th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''" type="text"
-                           id="cpf" name="cpf" placeholder="CPF..." th:field="*{cpf}"><br>
-
-                    <div th:if="${#fields.hasErrors('cpf')}" class="mensagemDeErro">
-                        <span class=""></span>
-                        <span th:errors="*{cpf}" class=""></span>
-                    </div>
-                    <br th:if="${#fields.hasErrors('cpf')}">
-
-                    <label for="email">E-mail: </label><br>
-                    <input th:classappend="${#fields.hasErrors('email')} ? 'inputError' : ''"
-                           type="text" id="email" name="email" placeholder="E-mail..." th:field="*{email}"><br>
-
-                    <div th:if="${#fields.hasErrors('email')}" class="mensagemDeErro">
-                        <span class="spanError"></span>
-                        <span th:errors="*{email}" class="textError"></span>
-                    </div>
-                    <br th:if="${#fields.hasErrors('email')}">
-
-                    <label for="telefone">Telefone: </label><br>
-                    <input inputmode="numeric" th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''"
-                           type="text" id="telefone" name="telefone"
-                           placeholder="Telefone..." th:field="*{telefone}"><br>
-
-                    <div th:if="${#fields.hasErrors('telefone')}" class="mensagemDeErro">
-                        <span class="spanError"></span>
-                        <span th:errors="*{telefone}" class="textError"></span>
-                    </div>
-                    <br th:if="${#fields.hasErrors('telefone')}">
-
-                    <label for="cep">CEP: </label><br>
-                    <input inputmode="numeric" th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : ''"
-                           type="text" id="cep" name="cep" placeholder="CEP..." th:field="*{cep}"><br>
-
-                    <div th:if="${#fields.hasErrors('cep')}" class="mensagemDeErro">
-                        <span class="spanError"></span>
-                        <span th:errors="*{cep}" class="textError"></span>
-                    </div>
-                    <br th:if="${#fields.hasErrors('cep')}">
-
-                    <div th:if="${!editMode}">
-                        <label for="senha">Senha: </label><br>
-                        <input th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"
-                               type="password" id="senha" name="senha" placeholder="Senha..." th:field="*{senha}"><br>
-                    </div>
-
-                    <div th:if="${#fields.hasErrors('senha')}" class="mensagemDeErro">
-                        <span class="spanError"></span>
-                        <span th:errors="*{senha}" class="textError"></span>
-                    </div>
-                    <br th:if="${#fields.hasErrors('senha')}">
-
-                    <input type="hidden" name="senha" value="#" th:if="${editMode}">
-
-                    <input type="submit" th:value="${editMode} ? 'Alterar' : 'Cadastrar'">
-                </fieldset>
-            </form>
-            <br>
+            </div>
 
 
+            <label for="email">E-mail: </label><br>
+            <input type="text" id="email" name="email" placeholder="E-mail..." th:field="*{email}"><br>
 
-            <input type="button" value="Voltar" th:onclick="${editMode} ? ('location.href=\'' + @{home} + '\';') : 'location.href=\'' + @{/} + '\';'">
-        </div>
+            <div id="emailAlert">
 
-        <script>
+            </div>
 
-            $("#cpf").inputmask("999.999.999.99");
+            <label for="telefone">Telefone: </label><br>
+            <input inputmode="numeric" type="text" id="telefone" name="telefone"
+                   placeholder="Telefone..." th:field="*{telefone}"><br>
 
-            $('#telefone').inputmask('99999999999');
+            <div id="telefoneAlert">
 
-            $('#cep').inputmask('99999-999');
+            </div>
 
-            const urlSearchParams = new URLSearchParams(window.location.search);
-            const params = Object.fromEntries(urlSearchParams.entries());
+            <label for="cep">CEP: </label><br>
+            <input inputmode="numeric" type="text" id="cep" name="cep" placeholder="CEP..." th:field="*{cep}"><br>
 
-            var isTrueSet = (params.cadastroCliente === 'true');
+            <div id="cepAlert">
 
-            if(isTrueSet){
+            </div>
 
-                document.getElementById('sucesso').insertAdjacentHTML(
-                    'afterbegin',
-                    `<div class="mensagemDeSucesso"">
+            <div th:if="${!editMode}">
+                <label for="senha">Senha: </label><br>
+                <input type="password" id="senha" name="senha" placeholder="Senha..." th:field="*{senha}"><br>
+            </div>
+
+            <div id="senhaAlert">
+
+            </div>
+
+            <input type="hidden" name="senha" value="#" th:if="${editMode}">
+
+            <input type="button" onclick="submitForm()" th:value="${editMode} ? 'Alterar' : 'Cadastrar'">
+        </fieldset>
+    </form>
+    <br>
+
+
+    <input type="button" value="Voltar"
+           th:onclick="${editMode} ? ('location.href=\'' + @{home} + '\';') : 'location.href=\'' + @{/} + '\';'">
+</div>
+
+<script>
+
+    $("#cpf").inputmask("999.999.999.99");
+
+    $('#telefone').inputmask('99999999999');
+
+    $('#cep').inputmask('99999-999');
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    var isTrueSet = (params.cadastroCliente === 'true');
+
+    if (isTrueSet) {
+
+        document.getElementById('sucesso').insertAdjacentHTML(
+            'afterbegin',
+            `<div class="mensagemDeSucesso"">
 \t\t\t\t<span class="spanSucesso"></span>
 \t\t\t\t<span class="textSucesso">Usuário gravado com sucesso</span>
 \t\t\t</div><br>`
+        )
+
+    }
+
+    function submitForm() {
+
+        var alertNome = document.getElementById("alertNome");
+        if(alertNome != null){
+            alertNome.remove();
+        }
+        var alertCpf = document.getElementById("alertCpf");
+        if(alertCpf != null){
+            alertCpf.remove();
+        }
+        var alertEmail = document.getElementById("alertEmail");
+        if(alertEmail != null){
+            alertEmail.remove();
+        }
+        var alertTelefone = document.getElementById("alertTelefone");
+        if(alertTelefone != null){
+            alertTelefone.remove();
+        }
+        var alertCep = document.getElementById("alertCep");
+        if(alertCep != null){
+            alertCep.remove();
+        }
+        var alertSenha = document.getElementById("alertSenha");
+        if(alertSenha != null){
+            alertSenha.remove();
+        }
 
 
-                )
+        var cpf = document.getElementById("cpf").value
+        var nome = document.getElementById("nome").value
+        var email = document.getElementById("email").value
+        var telefone = document.getElementById("telefone").value
+        var cep = document.getElementById("cep").value
+        var senha = document.getElementById("senha").value
 
+        if (nome == '') {
+
+            document.getElementById('nomeAlert').innerHTML = ' <div id="alertNome" class="mensagemDeErro">\n' +
+                '                <span class="spanError"></span>\n' +
+                '                <span class="textError">O nome não pode ser vazio</span>\n' +
+                '            </div>\n' +
+                '            <br>';
+
+        } else if (cpf.search("_") != -1 || cpf == ''){
+            if(cpf.search("_") != -1){
+                document.getElementById('cpfAlert').innerHTML = ' <div id="alertCpf" class="mensagemDeErro">\n' +
+                    '                <span class="spanError"></span>\n' +
+                    '                <span class="textError">O CPF está incompleto</span>\n' +
+                    '            </div>\n' +
+                    '            <br>';
             }
-        </script>
+
+            if(cpf == ''){
+                document.getElementById('cpfAlert').innerHTML = ' <div id="alertCpf" class="mensagemDeErro">\n' +
+                    '                <span class="spanError"></span>\n' +
+                    '                <span class="textError">O CPF não pode ser vazio</span>\n' +
+                    '            </div>\n' +
+                    '            <br>';
+            }
+
+        } else if(email == ''){
+            document.getElementById('emailAlert').innerHTML = ' <div id="alertEmail" class="mensagemDeErro">\n' +
+                '                <span class="spanError"></span>\n' +
+                '                <span class="textError">O E-mail não pode ser vazio</span>\n' +
+                '            </div>\n' +
+                '            <br>';
+        } else if (telefone.search("_") != -1 || telefone == ''){
+            if(telefone.search("_") != -1){
+                document.getElementById('telefoneAlert').innerHTML = ' <div id="alertTelefone" class="mensagemDeErro">\n' +
+                    '                <span class="spanError"></span>\n' +
+                    '                <span class="textError">O Telefone está incompleto</span>\n' +
+                    '            </div>\n' +
+                    '            <br>';
+            }
+
+            if(telefone == ''){
+                document.getElementById('telefoneAlert').innerHTML = ' <div id="alertTelefone" class="mensagemDeErro">\n' +
+                    '                <span class="spanError"></span>\n' +
+                    '                <span class="textError">O Telefone não pode ser vazio</span>\n' +
+                    '            </div>\n' +
+                    '            <br>';
+            }
+
+        } else if (cep.search("_") != -1 || cep == ''){
+            if(cep.search("_") != -1){
+                document.getElementById('cepAlert').innerHTML = ' <div id="alertCep" class="mensagemDeErro">\n' +
+                    '                <span class="spanError"></span>\n' +
+                    '                <span class="textError">O CEP está incompleto</span>\n' +
+                    '            </div>\n' +
+                    '            <br>';
+            }
+
+            if(cep == ''){
+                document.getElementById('cepAlert').innerHTML = ' <div id="alertCep" class="mensagemDeErro">\n' +
+                    '                <span class="spanError"></span>\n' +
+                    '                <span class="textError">O CEP não pode ser vazio</span>\n' +
+                    '            </div>\n' +
+                    '            <br>';
+            }
+
+        } else if(senha == '') {
+
+            document.getElementById('senhaAlert').innerHTML = ' <div id="alertSenha" class="mensagemDeErro">\n' +
+                '                <span class="spanError"></span>\n' +
+                '                <span class="textError">A senha não pode ser vazio</span>\n' +
+                '            </div>\n' +
+                '            <br>';
+
+        } else{
+            document.getElementById("formCliente").submit();
+        }
+
+
+    }
+</script>
 
 
 </body>

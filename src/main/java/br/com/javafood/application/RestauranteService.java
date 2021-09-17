@@ -157,8 +157,24 @@ public class RestauranteService {
         return itemCardapioRepository.listItems(restauranteIdId);
     }
 
+    public List<ItemCardapio> listItemsRestauranteDesativados(Integer restauranteIdId){
+        return itemCardapioRepository.listItemsDesativados(restauranteIdId);
+    }
+
     public List<PedidoItemCardapio> listPedidosRestaurante(Integer restauranteIdId){
         return pedidoItemCardapioRepository.listPedidosItems(restauranteIdId);
+    }
+
+    @Transactional
+    public void desativarItemCardapioService(Integer id){
+       ItemCardapio itemCardapio = itemCardapioRepository.getById(id);
+       itemCardapio.setAtivo(false);
+    }
+
+    @Transactional
+    public void ativarItemCardapioService(Integer id){
+        ItemCardapio itemCardapio = itemCardapioRepository.getById(id);
+        itemCardapio.setAtivo(true);
     }
 
 }

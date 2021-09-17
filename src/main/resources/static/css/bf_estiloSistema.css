@@ -22,7 +22,7 @@ a:hover
 
 .divLogoTipoSistema
 {
-    background-color: #1e9bde;
+    background-color: #ea1d2c;
     height: 70px;
     margin: auto;
 
@@ -48,17 +48,17 @@ a:hover
 
 h1
 {
-    color: #1e9bde;
+    color: #ea1d2c;
     text-transform: uppercase;
     font-style: italic;
     font-size: 20px;
     width: 300px;
     margin-left: auto;
     margin-right: auto;
-    border-left: #1e9bde solid 10px;
-    border-right: #1e9bde solid 10px;
-    border-bottom: #1e9bde solid 2px;
-    border-top: #1e9bde solid 2px;
+    border-left: #ea1d2c solid 10px;
+    border-right: #ea1d2c solid 10px;
+    border-bottom: #ea1d2c solid 2px;
+    border-top: #ea1d2c solid 2px;
     border-radius: 30px;
 }
 
@@ -133,7 +133,7 @@ fieldset
 
 input, textarea, select
 {
-    border: 2px solid #1e9bde;
+    border: 2px solid #ea1d2c;
     height: 25px;
     margin-bottom: 20px;
 }
@@ -149,11 +149,11 @@ input[type=text], input[type=password], select, input[type=file]
 
 input[type=button], input[type=submit]
 {
-    background-color: #1e9bde;
-    border-bottom: 3px solid #0153b0;
-    border-top: 1px solid #0153b0;
-    border-left: 1px solid #0153b0;
-    border-right: 1px solid #0153b0;
+    background-color: #e35e5e;
+    border-bottom: 3px solid #ea1d2c;
+    border-top: 1px solid #ea1d2c;
+    border-left: 1px solid #ea1d2c;
+    border-right: 1px solid #ea1d2c;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
@@ -163,8 +163,8 @@ input[type=button], input[type=submit]
 
 input[type=button]:hover, input[type=submit]:hover
 {
-    background-color: #69c5ee;
-    border-color: #1e9bde;
+    background-color: #fd3846;
+    border-color: #ea1d2c;
 }
 
 table
@@ -188,7 +188,7 @@ tr:nth-child(odd)
 
 th
 {
-    background-color: #1e9bde;
+    background-color: #ea1d2c;
     color: white;
     text-transform: uppercase;
     padding: 15px;
@@ -228,8 +228,8 @@ td
 
 #inputSelecionado
 {
-    background-color: #69c5ee;
-    border-color: #1e9bde;
+    background-color: #fd3846;
+    border-color: #ea1d2c;
 }
 
 .imgRestauranteOpcao

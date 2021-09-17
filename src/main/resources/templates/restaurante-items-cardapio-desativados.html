@@ -24,9 +24,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title col-sm-8">Todos os items do cardápio</h3>
-                        <form th:action="@{/restaurante/items/list/desativados}" method="GET" >
-                            <button  type="submit" class="btn btn-block btn-danger col-sm-4">Items Desativados</button>
+                        <h3 class="card-title col-sm-8">Items desativados do cardápio</h3>
+                        <form th:action="@{/restaurante/items/list}" method="GET">
+                            <button type="submit" class="btn btn-block btn-primary col-sm-4">Items Ativos</button>
                         </form>
                     </div>
                     <!-- /.card-header -->
@@ -47,13 +47,11 @@
                                 <td th:text="${item.getCategoria()}"></td>
                                 <td th:text="${item.getDescricao()}"></td>
                                 <td th:text="${'R$ ' + item.getPreco()}"></td>
-                                <td style="text-align: center">
-                                    <a th:href="@{/restaurante/itemcardapio/edit?id=} + ${item.getId()}">
-                                        <i class="fas fa-edit"></i>
+                                <td>
+                                    <a th:href="@{/restaurante/itemcardapio/ativar?id=} + ${item.getId()}">
+                                        <button type="button" class="btn btn-block btn-primary">Ativar</button>
                                     </a>
-                                    <a style="margin-left: 5px" th:href="@{/restaurante/itemcardapio/desativar?id=} + ${item.getId()}">
-                                        <i onclick="" class="fas fa-trash-alt"></i>
-                                    </a>
+
                                 </td>
                             </tr>
 
