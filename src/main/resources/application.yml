@@ -1,8 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/javafood?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
-    username: root
-    password:
+    url: postgres://igvjvmtpfcaaky:43c58f60bb3f8de3eab11280b9b54947d44f6a5ce80ef68e5b99390136265804@ec2-44-193-150-214.compute-1.amazonaws.com:5432/dcid2lf1p7k6bs
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,3 +17,8 @@ bluefood:
     categoria: src/main/resources/static/image/categoria
 
 
+      #url: jdbc:mysql://localhost:3306/javafood?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+      #username: root
+    #password:
+
+#      driver-class-name: org.postgresql.Driver
