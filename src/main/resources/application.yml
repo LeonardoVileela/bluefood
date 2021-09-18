@@ -1,10 +1,11 @@
 spring:
   datasource:
-    url: postgres://wdcibsxayabkji:e9708500ccee4d31de6b5eb807d82181f7be0059110547a87eef818abaf94e93@ec2-44-198-151-32.compute-1.amazonaws.com:5432/d9hjoorcjqffbe
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/javafood?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: root
+    password:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     open-in-view: false
   servlet:
     multipart:
