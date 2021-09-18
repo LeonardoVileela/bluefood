@@ -121,7 +121,7 @@ public class PublicController {
             return "redirect:/public/cliente/new" + "?cadastroCliente=true";
         }
 
-        return "cliente-cadastro";
+        return "redirect:/login";
     }
 
 }
