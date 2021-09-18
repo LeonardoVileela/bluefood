@@ -18,10 +18,3 @@ bluefood:
     categoria: src/main/resources/static/image/categoria
 
 
-
-    #url: jdbc:mysql://localhost:3306/javafood?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
-      #username: root
-      #password:
-
-#      driver-class-name: org.postgresql.Driver
-

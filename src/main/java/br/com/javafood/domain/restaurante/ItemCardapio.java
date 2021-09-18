@@ -63,9 +63,6 @@ public class ItemCardapio implements Serializable {
     @JoinColumn(name = "restaurante_id")
     private Restaurante restaurante;
 
-    @UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo não é um arquivo de imagem válido")
-    private transient MultipartFile imagemFile;
-
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
     private Set<PedidoItemCardapio> pedido = new HashSet<PedidoItemCardapio>();
 

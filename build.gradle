@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
+    implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '5.5.2'
    // implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' //serve para pegar coisas do usuario logado no próprio thymeleaf
     compileOnly 'org.projectlombok:lombok'

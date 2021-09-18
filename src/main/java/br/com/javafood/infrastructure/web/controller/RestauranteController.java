@@ -6,6 +6,7 @@ import br.com.javafood.application.ValidationException;
 import br.com.javafood.domain.pedido.Pedido;
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.pedido.PedidoItemCardapio;
+import br.com.javafood.domain.restaurante.ItemCardapioRepository;
 import br.com.javafood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class RestauranteController {
 
     @Autowired
     private RestauranteService restauranteService;
+
+    @Autowired
+    private ItemCardapioRepository itemCardapioRepository;
 
     @GetMapping(path = "/home")
     public String home(Model model) {
@@ -67,10 +71,32 @@ public class RestauranteController {
 
         //TODO mudar redirect para mostrar mensagem de save
         if(restauranteCadastro){
-            return "redirect:/restaurante/itemCadastro" + "?cadastroRestaurante=true";
+            return "redirect:/restaurante/itemCadastro" + "?cadastroItem=true";
         }
 
-        return "item-cadastro";
+        return "redirect:/restaurante/itemCadastro" + "?cadastroItem=false";
+
+    }
+
+    @PostMapping(path = "/item/edit")
+    public String editItemCardapio(
+            @ModelAttribute("itemCardapio") ItemCardapio itemCardapio,
+            Errors errors,
+            Model model
+    ) {
+        ItemCardapio itemCardapioEdit = itemCardapioService.searchById(itemCardapio.getId());
+        if(itemCardapio.getLogotipoFile().getOriginalFilename() == ""){
+
+            itemCardapio.setLogotipoFile(itemCardapioEdit.getLogotipoFile());
+            itemCardapio.setLogotipo(itemCardapioEdit.getLogotipo());
+        }
+        itemCardapio.setAtivo(itemCardapioEdit.getAtivo());
+        itemCardapio.setRestaurante(SecurityUtils.loggedRestaurante());
+
+        itemCardapioRepository.save(itemCardapio);
+
+
+        return "redirect:/restaurante/items/list";
 
     }
 
@@ -132,6 +158,9 @@ public class RestauranteController {
     public String todosPedidos(
             Model model
     ){
+
+        List<Pedido> nice = restauranteService.listPedidosRestaurante(SecurityUtils.loggedRestaurante().getId());
+
         model.addAttribute("pedidos", restauranteService.listPedidosRestaurante(SecurityUtils.loggedRestaurante().getId()));
 
         return "restaurante-pedidos-todos";
@@ -156,5 +185,18 @@ public class RestauranteController {
 
         return "redirect:/restaurante/items/list";
     }
+
+    @GetMapping(path = "/itemcardapio/edit")
+    public String editItemCardapio(
+            Model model,
+            @RequestParam(required = true) Integer id
+    ){
+
+        ItemCardapio itemCardapio = itemCardapioService.searchById(id);
+        model.addAttribute("itemCardapio", itemCardapio);
+
+        return "item-cardapio-edit";
+    }
+
 
 }

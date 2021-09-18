@@ -31,8 +31,9 @@
     </div><!-- /.container-fluid -->
   </section>
 
-  <form id="formItem" th:action="@{/restaurante/item/save}" method="POST" th:object="${itemCardapio}" enctype="multipart/form-data">
+  <form id="formItem" th:action="@{/restaurante/item/edit}" method="POST" th:object="${itemCardapio}" enctype="multipart/form-data">
 
+    <input style="display: none" th:value="${itemCardapio.getId()}" th:field="*{id}" type="text" id="id" name="id">
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -50,7 +51,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label>Nome:</label>
-                    <input th:field="*{nome}"  type="text" id="nome" name="nome" class="form-control" placeholder="Nome...">
+                    <input th:value="${itemCardapio.getNome()}" th:field="*{nome}"  type="text" id="nome" name="nome" class="form-control" placeholder="Nome...">
                   </div>
                 </div>
 
@@ -58,19 +59,19 @@
                   <div class="form-group">
 
                     <label>Categoria:</label>
-                    <input th:field="*{categoria}"  type="text" id="categoria" name="categoria" class="form-control" placeholder="Categoria...">
+                    <input th:value="${itemCardapio.getCategoria()}" th:field="*{categoria}"  type="text" id="categoria" name="categoria" class="form-control" placeholder="Categoria...">
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <label>Descrição:</label>
-                    <input th:field="*{descricao}"  type="text" id="descricao" name="descricao" class="form-control" placeholder="Descrição...">
+                    <input th:value="${itemCardapio.getDescricao()}" th:field="*{descricao}"  type="text" id="descricao" name="descricao" class="form-control" placeholder="Descrição...">
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <label>Preço:</label>
-                    <input th:field="*{preco}"  type="text" id="preco" name="preco"  class="form-control" placeholder="Preço...">
+                    <input th:value="${itemCardapio.getPreco()}" th:field="*{preco}"  type="text" id="preco" name="preco"  class="form-control" placeholder="Preço...">
                   </div>
                 </div>
 
@@ -79,7 +80,7 @@
                     <label for="logotipo">Imagem:</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input th:field="*{logotipoFile}"  type="file" id="logotipo" name="logotipo" class="custom-file-input">
+                        <input th:value="${itemCardapio.getLogotipoFile()}" th:field="*{logotipoFile}"  type="file" id="logotipo" name="logotipo" class="custom-file-input">
                         <label class="custom-file-label" for="logotipo">Escolha a imagem</label>
                       </div>
                     </div>
@@ -101,7 +102,7 @@
   </section>
   <!-- /.content -->
   <div style="text-align: center;">
-    <button style="max-width: 200px;" type="button" onclick="submitForm()" class="btn-lg btn-danger">Cadastrar</button>
+    <button style="max-width: 200px;" type="button" onclick="submitForm()" class="btn-lg btn-danger">Editar</button>
   </div>
 
   </form>
@@ -124,22 +125,6 @@
 
 <script>
 
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
-
-
-
-
-  if(params.cadastroItem === 'true'){
-    toastr.success('Cadastrado com sucesso')
-  }
-
-  if(params.cadastroItem === 'false'){
-    toastr.error('Ops! Houve algum problema, tente de novo mais tarde.')
-  }
-
-
-
   function submitForm() {
     var nome = document.getElementById("nome").value
     var categoria = document.getElementById("categoria").value
@@ -150,6 +135,7 @@
     console.log(logotipo)
 
     if (nome == '') {
+
       toastr.error('O nome do item não pode ser vazio')
 
     } else if (categoria == ''){
@@ -164,10 +150,8 @@
 
       toastr.error('O preço não pode ser vazio')
 
-    } else if (logotipo == ''){
-      toastr.error('A imagem do item é obrigatória')
     } else{
-       document.getElementById("formItem").submit();
+      document.getElementById("formItem").submit();
     }
 
 

@@ -31,6 +31,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        <button style="margin-top: 5px; margin-bottom: 10px;margin-left: auto; margin-right: auto; width: 160px;" onclick="atualizar()" type="button" class="btn btn-block btn-primary">Atualizar Tabela <i style="margin-left: 6px" class="fas fa-sync-alt"></i></button>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -89,6 +90,11 @@
 <script th:src="@{/prototipo/plugins/}"></script>
 
 <script>
+    function atualizar(){
+        location.reload();
+    }
+
+
     $(function () {
         $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,

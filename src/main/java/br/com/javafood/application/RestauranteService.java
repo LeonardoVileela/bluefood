@@ -10,6 +10,8 @@ import br.com.javafood.domain.restaurante.RestauranteRepository;
 import br.com.javafood.domain.pedido.PedidoItemCardapio;
 import br.com.javafood.domain.pedido.PedidoItemCardapioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -161,7 +163,7 @@ public class RestauranteService {
         return itemCardapioRepository.listItemsDesativados(restauranteIdId);
     }
 
-    public List<PedidoItemCardapio> listPedidosRestaurante(Integer restauranteIdId){
+    public List<Pedido> listPedidosRestaurante(Integer restauranteIdId){
         return pedidoItemCardapioRepository.listPedidosItems(restauranteIdId);
     }
 
@@ -176,5 +178,16 @@ public class RestauranteService {
         ItemCardapio itemCardapio = itemCardapioRepository.getById(id);
         itemCardapio.setAtivo(true);
     }
+
+    //criptografia nice
+    public void criptrografia(){
+        TextEncryptor t = Encryptors.noOpText();
+        String ui = t.encrypt("aiiaa");
+        String vai = t.decrypt(ui);
+        System.out.println(vai);
+
+    }
+
+
 
 }
