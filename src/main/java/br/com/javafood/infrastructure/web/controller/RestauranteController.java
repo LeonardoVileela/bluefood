@@ -83,17 +83,23 @@ public class RestauranteController {
             @ModelAttribute("itemCardapio") ItemCardapio itemCardapio,
             Errors errors,
             Model model
-    ) {
+    ) throws ValidationException {
         ItemCardapio itemCardapioEdit = itemCardapioService.searchById(itemCardapio.getId());
         if(itemCardapio.getLogotipoFile().isEmpty()){
             System.out.println("entrou nice maluco");
             itemCardapio.setLogotipoFile(itemCardapioEdit.getLogotipoFile());
             itemCardapio.setLogotipo(itemCardapioEdit.getLogotipo());
-        }
-        itemCardapio.setAtivo(itemCardapioEdit.getAtivo());
-        itemCardapio.setRestaurante(SecurityUtils.loggedRestaurante());
+            itemCardapio.setAtivo(itemCardapioEdit.getAtivo());
+            itemCardapio.setRestaurante(SecurityUtils.loggedRestaurante());
 
-        itemCardapioRepository.save(itemCardapio);
+            itemCardapioRepository.save(itemCardapio);
+        }else{
+            itemCardapio.setAtivo(itemCardapioEdit.getAtivo());
+            itemCardapio.setRestaurante(SecurityUtils.loggedRestaurante());
+            itemCardapioService.save(itemCardapio);
+        }
+
+
 
 
         return "redirect:/restaurante/items/list";
