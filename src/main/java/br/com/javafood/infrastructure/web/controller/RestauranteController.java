@@ -85,8 +85,7 @@ public class RestauranteController {
             Model model
     ) {
         ItemCardapio itemCardapioEdit = itemCardapioService.searchById(itemCardapio.getId());
-        System.out.println(itemCardapio.getLogotipoFile().isEmpty());
-        if(itemCardapio.getLogotipoFile().getOriginalFilename() == ""){
+        if(itemCardapio.getLogotipoFile().isEmpty()){
             System.out.println("entrou nice maluco");
             itemCardapio.setLogotipoFile(itemCardapioEdit.getLogotipoFile());
             itemCardapio.setLogotipo(itemCardapioEdit.getLogotipo());
