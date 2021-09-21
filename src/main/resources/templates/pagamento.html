@@ -11,6 +11,8 @@
     <title>JAVAFOOD</title>
     <link rel="stylesheet" th:href="@{/cssIfood/pagamento.css}"/>
     <script th:src="@{/jsfood/jquery-3.6.0.min.js}" ></script>
+    <!-- Toastr -->
+    <link rel="stylesheet" th:href="@{/prototipo/plugins/toastr/toastr.min.css}" >
 </head>
 
 <body>
@@ -46,22 +48,22 @@
                 </div>
             </div>
         </div>
-        <form method="POST" th:action="@{/cliente/pagamento/save}" class="form" autocomplete="off" novalidate>
+        <form id="formCard" th:object="${card}" method="POST" th:action="@{/cliente/pagamento/save}" class="form" autocomplete="off" novalidate>
             <fieldset>
                 <label for="card-number">Número do cartão</label>
-                <input inputmode="numeric" type="num" id="card-number" class="input-cart-number" maxlength="4" />
-                <input inputmode="numeric" type="num" id="card-number-1" class="input-cart-number" maxlength="4" />
-                <input inputmode="numeric" type="num" id="card-number-2" class="input-cart-number" maxlength="4" />
-                <input inputmode="numeric" type="num" id="card-number-3" class="input-cart-number" maxlength="4" />
+                <input name="number[]" inputmode="numeric" type="num" id="card-number" class="input-cart-number" maxlength="4" />
+                <input name="number[]" inputmode="numeric" type="num" id="card-number-1" class="input-cart-number" maxlength="4" />
+                <input name="number[]" inputmode="numeric" type="num" id="card-number-2" class="input-cart-number" maxlength="4" />
+                <input name="number[]" inputmode="numeric" type="num" id="card-number-3" class="input-cart-number" maxlength="4" />
             </fieldset>
             <fieldset>
                 <label for="card-holder">Titular do cartão</label>
-                <input type="text" id="card-holder" />
+                <input name="name" type="text" id="card-holder" />
             </fieldset>
             <fieldset class="fieldset-expiration">
                 <label for="card-expiration-month">Data de validade</label>
                 <div class="select">
-                    <select id="card-expiration-month">
+                    <select name="data[]" id="card-expiration-month">
                         <option></option>
                         <option>01</option>
                         <option>02</option>
@@ -78,7 +80,7 @@
                     </select>
                 </div>
                 <div class="select">
-                    <select id="card-expiration-year">
+                    <select name="data[]" id="card-expiration-year">
                         <option></option>
                         <option>2021</option>
                         <option>2022</option>
@@ -95,13 +97,59 @@
             </fieldset>
             <fieldset class="fieldset-ccv">
                 <label for="card-ccv">CCV</label>
-                <input inputmode="numeric" type="text" id="card-ccv" maxlength="3" />
+                <input name="cvv" inputmode="numeric" type="text" id="card-ccv" maxlength="3" />
             </fieldset>
-            <button class="btn">Pagar</button>
+            <input id="bandeira" name="bandeira" type="text" hidden>
+            <button type="button" onclick="submitForm()" class="btn">Pagar</button>
         </form>
     </div>
 
+    <!-- Toastr -->
+    <script th:src="@{/prototipo/plugins/toastr/toastr.min.js}"></script>
+
     <script>
+
+        var bandeira = true;
+
+        function submitForm() {
+            var cardnumber = document.getElementById("card-number").value
+            var cardnumber1 = document.getElementById("card-number-1").value
+            var cardnumber2 = document.getElementById("card-number-2").value
+            var cardnumber3 = document.getElementById("card-number-3").value
+
+            var titular = document.getElementById("card-holder").value
+            var cardMonth = document.getElementById("card-expiration-month").value
+            var cardYear = document.getElementById("card-expiration-year").value
+            var cardCVV = document.getElementById("card-ccv").value
+
+            if (cardnumber == '' || cardnumber1 == '' || cardnumber2 == '' || cardnumber3 == ''  ) {
+                toastr.error('O Número do cartão não pode ser vazio')
+
+            } else if (isNaN(cardnumber) || isNaN(cardnumber1) || isNaN(cardnumber2) || isNaN(cardnumber3) ){
+                toastr.error('Número do cartão é inválido')
+
+            } else if(titular == ''){
+                toastr.error('O nome do titular não pode ser vazia')
+
+            } else if ( cardMonth == ''){
+                toastr.error('O mês não pode ser vazio')
+
+            } else if (cardYear == ''){
+                toastr.error('O ano não pode ser vazio')
+            } else if (cardCVV == ''){
+                toastr.error('O CVV não pode ser vazio')
+            } else if (isNaN(cardCVV)){
+                toastr.error('O CVV é inválido')
+            } else if (bandeira == false){
+                toastr.error('Número do cartão é inválido')
+            } else{
+                document.getElementById("formCard").submit();
+            }
+
+        }
+
+
+
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode;
 
@@ -154,6 +202,8 @@
 
         function getCreditCardType(accountNumber) {
             if (/^5[1-5]/.test(accountNumber)) {
+                bandeira = true;
+                document.getElementById("bandeira").value = 'mastercard';
 
                 $(".logoCartao").remove();
                 $(".logo").append('<svg class="logoCartao" xmlns="http://www.w3.org/2000/svg" width="2.11676in" height="1.5in" viewBox="0 0 152.407 108">' +
@@ -170,6 +220,8 @@
 
                 result = 'mastercard';
             } else if (/^4/.test(accountNumber)) {
+                bandeira = true;
+                document.getElementById("bandeira").value = 'visa';
                 result = 'visa';
                 $(".logoCartao").remove();
 
@@ -196,6 +248,8 @@
 
 
             } else if (/^(5018|5020|5038|6304|6759|676[1-3])/.test(accountNumber)) {
+                bandeira = true;
+                document.getElementById("bandeira").value = 'maestro';
                 result = 'Maestro';
 
                 $(".logoCartao").remove();
@@ -216,6 +270,8 @@
 
 
             } else if (/^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/.test(accountNumber)) {
+                bandeira = true;
+                document.getElementById("bandeira").value = 'elo';
                 result = 'Elo'
 
                 $(".logoCartao").remove();
@@ -257,6 +313,7 @@
 
             } else {
                 result = 'Nenhum'
+                bandeira = false;
 
                 $(".logoCartao").remove();
             }

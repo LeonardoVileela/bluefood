@@ -1,4 +1,4 @@
-package br.com.javafood.test;
+/*package br.com.javafood.test;
 
 import br.com.javafood.domain.restaurante.CategoriaRestaurante;
 import br.com.javafood.domain.restaurante.CategoriaRestauranteRepository;
@@ -44,4 +44,4 @@ public class InsereCategorias {
     }
 
 
-}
+}*/

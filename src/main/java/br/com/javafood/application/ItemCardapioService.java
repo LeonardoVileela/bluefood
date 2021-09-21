@@ -2,7 +2,6 @@ package br.com.javafood.application;
 
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.restaurante.ItemCardapioRepository;
-import br.com.javafood.domain.restaurante.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

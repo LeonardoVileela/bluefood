@@ -2,8 +2,6 @@ package br.com.javafood.domain.cliente;
 
 import br.com.javafood.domain.restaurante.ItemCardapio;
 import br.com.javafood.domain.usuario.Usuario;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,10 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -33,6 +30,7 @@ public class Cliente extends Usuario {
 
     @Transient
     private Map<ItemCardapio, Integer> carrinho = new HashMap<>();
+
 
     public void addItemCarrinho(ItemCardapio itemCardapio){
         System.out.println(itemCardapio.getId());

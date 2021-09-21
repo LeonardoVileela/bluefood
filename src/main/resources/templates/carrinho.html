@@ -27,6 +27,7 @@
       }
     </style>
   </head>
+
   <body>
 
   <center>
@@ -36,8 +37,7 @@
       <!-- Title -->
       <div class="title">
         <span th:text="'Total: R$ ' + ${totalCarrinho}"></span>
-        <!-- <button class="btn btn-primary" th:onclick="'location.href=\'' + @{/cliente/home} + '\';'">Continuar comparando</button>-->
-        <button th:onclick="'location.href=\'' + @{/cliente/pagamento} + '\';'" style="width: 200px; padding-bottom: 30px; margin-left: 5px;" class="btn btn-outline-danger" type="submit">FINALIZAR COMPRA</button>
+        <button th:onclick="'location.href=\'' + @{/cliente/pagamentoCard} + '\';'" style="width: 200px; padding-bottom: 30px; margin-left: 5px;" class="btn btn-outline-danger" type="submit">FINALIZAR COMPRA</button>
       </div>
 
       <!-- Product #1 -->

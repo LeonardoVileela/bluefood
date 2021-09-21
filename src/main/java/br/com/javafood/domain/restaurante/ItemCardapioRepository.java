@@ -1,6 +1,5 @@
 package br.com.javafood.domain.restaurante;
 
-import br.com.javafood.domain.pedido.PedidoItemCardapio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

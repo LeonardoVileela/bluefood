@@ -75,13 +75,21 @@
                   </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-3">
+                  <div class="form-group">
+                    <center>
+                     <img  style="max-height: 100px !important; " th:src="@{/image/comida/} + ${itemCardapio.getLogotipo()}" alt="" class="img-fluid"/>
+                    </center>
+                  </div>
+                </div>
+
+                <div class="col-9">
                   <div class="form-group">
                     <label for="logotipo">Imagem:</label>
                     <div class="input-group">
                       <div class="custom-file">
                         <input th:value="${itemCardapio.getLogotipoFile()}" th:field="*{logotipoFile}"  type="file" id="logotipo" name="logotipo" class="custom-file-input">
-                        <label class="custom-file-label" for="logotipo">Escolha a imagem</label>
+                        <label class="custom-file-label" for="logotipo">Trocar imagem</label>
                       </div>
                     </div>
                   </div>

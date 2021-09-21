@@ -1,6 +1,8 @@
 package br.com.javafood.infrastructure.web.controller;
 
 import br.com.javafood.application.*;
+import br.com.javafood.domain.card.Card;
+import br.com.javafood.domain.card.CardRepository;
 import br.com.javafood.domain.cliente.Cliente;
 import br.com.javafood.domain.cliente.ClienteRepository;
 import br.com.javafood.domain.pedido.Pedido;
@@ -35,6 +37,9 @@ public class ClienteController {
     private RestauranteService restauranteService;
 
     @Autowired
+    private CardRepository cardRepository;
+
+    @Autowired
     private ItemCardapioService itemCardapioService;
 
     @Autowired
@@ -42,6 +47,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private CardService cardService;
 
     @GetMapping(path = "/home")
     public String home(Model model) {
@@ -182,7 +190,12 @@ public class ClienteController {
 
     @PostMapping(path = "/pagamento/save")
     public String saveCarrinho(
+             Card card
     ){
+
+        if(card.getNumber() != null){
+            cardService.save(card);
+        }
 
         Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
         Integer id = pedidoService.save(itemsCarrinho);
@@ -193,8 +206,34 @@ public class ClienteController {
 
     @GetMapping(path = "/pagamento")
     public String pagamento(
+            Model model
     ){
         return "pagamento";
+    }
+
+    @GetMapping(path = "/pagamentoCard")
+    public String pagamentoCard(
+            Model model
+    ){
+        Card card = cardRepository.findByClienteId(SecurityUtils.loggedCliente().getId());
+        if(card == null){
+            return "redirect:/cliente/pagamento";
+        }
+
+
+        try {
+            String number = SecurityUtils.decrypt(card.getNumber());
+            String newNumber = "**** **** **** " + number.substring(15);
+            String data = SecurityUtils.decrypt(card.getData());
+            model.addAttribute("bandeira", card.getBandeira().toUpperCase());
+            model.addAttribute("number", newNumber);
+            model.addAttribute("data", data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "cards";
+
     }
 
     @GetMapping(path = "/pedidos")
