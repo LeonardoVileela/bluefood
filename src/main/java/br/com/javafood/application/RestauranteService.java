@@ -179,15 +179,6 @@ public class RestauranteService {
         itemCardapio.setAtivo(true);
     }
 
-    //criptografia nice
-    public void criptrografia(){
-        TextEncryptor t = Encryptors.noOpText();
-        String ui = t.encrypt("aiiaa");
-        String vai = t.decrypt(ui);
-        System.out.println(vai);
-
-    }
-
 
 
 }

@@ -86,7 +86,6 @@ public class RestauranteController {
     ) throws ValidationException {
         ItemCardapio itemCardapioEdit = itemCardapioService.searchById(itemCardapio.getId());
         if(itemCardapio.getLogotipoFile().isEmpty()){
-            System.out.println("entrou nice maluco");
             itemCardapio.setLogotipoFile(itemCardapioEdit.getLogotipoFile());
             itemCardapio.setLogotipo(itemCardapioEdit.getLogotipo());
             itemCardapio.setAtivo(itemCardapioEdit.getAtivo());

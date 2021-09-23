@@ -33,10 +33,7 @@ public class Cliente extends Usuario {
 
 
     public void addItemCarrinho(ItemCardapio itemCardapio){
-        System.out.println(itemCardapio.getId());
         this.carrinho.put(itemCardapio, 1);
-        System.out.println(this.carrinho);
-        System.out.println();
     }
 
     public void removeItemCarrinho(ItemCardapio itemCardapio){
