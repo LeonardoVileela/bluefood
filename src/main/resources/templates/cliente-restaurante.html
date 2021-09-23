@@ -113,7 +113,7 @@
                             <br>
                             <br>
                         </p>
-                        <a th:href="@{/cliente/carrinho} + '?itemCarrinhoId=' + ${itemCardapio.id}"
+                        <a th:href="@{/cliente/carrinho} + '?itemCarrinhoId=' + ${itemCardapio.id} + '&restauranteId=' + ${restaurante.getId()}"
                            class="btn btn-danger">Adicionar no carrinho</a>
                     </div>
                 </div>

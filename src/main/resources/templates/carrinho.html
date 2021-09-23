@@ -31,7 +31,7 @@
   <body>
 
   <center>
-    <button th:onclick="'location.href=\'' + @{/cliente/home} + '\';'" id="add-button-center" class="btn btn-outline-primary" type="submit">CONTINUAR COMPRANDO</button>
+    <button th:onclick="${continuarComprando == null} ? 'location.href=\'' + @{/cliente/home} + '\';' : 'location.href=\'' + @{/cliente/restaurante} + '?restautenteId=' + ${continuarComprando} + '\';' " id="add-button-center" class="btn btn-outline-primary" type="submit">CONTINUAR COMPRANDO</button>
   </center>
     <div class="shopping-cart">
       <!-- Title -->
@@ -94,8 +94,16 @@
     		var $input = $this.closest('div').find('input');
     		var value = parseInt($input.val());
 
+          const urlSearchParams = new URLSearchParams(window.location.search);
+          const params = Object.fromEntries(urlSearchParams.entries());
 
-          window.location.replace('http://' + window.location.host + '/cliente/carrinho?quant=plus&itemCarrinhoId=' + value);
+          if(params.restauranteId != undefined){
+            window.location.replace('http://' + window.location.host + '/cliente/carrinho?quant=plus&itemCarrinhoId=' + value + '&restauranteId=' + params.restauranteId);
+          }else {
+            window.location.replace('http://' + window.location.host + '/cliente/carrinho?quant=plus&itemCarrinhoId=' + value);
+          }
+
+
     	});
 
       $('.like-btn').on('click', function() {

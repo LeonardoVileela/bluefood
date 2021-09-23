@@ -147,6 +147,7 @@ public class ClienteController {
     public String carrinho(
             @RequestParam(required = false) Integer itemCarrinhoId,
             @RequestParam(required = false) String quant,
+            @RequestParam(required = false) Integer restauranteId,
             Model model
     ) {
 
@@ -163,7 +164,6 @@ public class ClienteController {
                 if(SecurityUtils.loggedCliente().contain(itemCardapio)){
                     SecurityUtils.loggedCliente().addExisting(itemCardapio.getId());
                 }else{
-                    System.out.println("not contain");
                     SecurityUtils.loggedCliente().addItemCarrinho(itemCardapio);
                 }
             }
@@ -171,6 +171,7 @@ public class ClienteController {
         Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
         model.addAttribute("itemsCarrinho", itemsCarrinho);
         model.addAttribute("totalCarrinho", SecurityUtils.loggedCliente().totalCarrinho());
+        model.addAttribute("continuarComprando", restauranteId);
 
         return "carrinho";
     }
