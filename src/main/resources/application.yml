@@ -1,7 +1,8 @@
 spring:
   datasource:
-    url: postgres://poiofxfulhbsdp:5af5b9ed103b555f81d67fa8cb16fd75d075f5aa6eb2ac91600f2e458860c242@ec2-34-227-120-94.compute-1.amazonaws.com:5432/dflmk8j9fcsma4
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/javafood?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: root
+    password:
   jpa:
     hibernate:
       ddl-auto: update
