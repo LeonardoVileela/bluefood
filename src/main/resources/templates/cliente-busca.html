@@ -78,6 +78,12 @@
 <br>
 
 <center>
+<div style="margin-bottom: 200px" th:if="${restaurantes.size() == 0}">
+    <span style="font-size: 30px">Nenhum restaurante encontrado</span>
+    <br />
+</div>
+</center>
+<center>
     <div class="container">
         <div class="row">
             <div class="col-sm banner" th:each="restaurante : ${restaurantes}">
