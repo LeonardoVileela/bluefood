@@ -198,6 +198,10 @@ public class ClienteController {
             cardService.save(card);
         }
 
+        if(SecurityUtils.loggedCliente().getCarrinho().size() == 0){
+            return "redirect:/cliente/home";
+        }
+
         Map<ItemCardapio, Integer> itemsCarrinho = SecurityUtils.loggedCliente().getItemsCarrinho();
         Integer id = pedidoService.save(itemsCarrinho);
         SecurityUtils.loggedCliente().esvaziarCarrinho();

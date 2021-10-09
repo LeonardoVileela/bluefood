@@ -37,7 +37,7 @@
       <!-- Title -->
       <div class="title">
         <span th:text="'Total: R$ ' + ${totalCarrinho}"></span>
-        <button th:onclick="'location.href=\'' + @{/cliente/pagamentoCard} + '\';'" style="width: 200px; padding-bottom: 30px; margin-left: 5px;" class="btn btn-outline-danger" type="submit">FINALIZAR COMPRA</button>
+        <button id="finalizar" th:onclick="'location.href=\'' + @{/cliente/pagamentoCard} + '\';'" style="width: 200px; padding-bottom: 30px; margin-left: 5px;" class="btn btn-outline-danger" type="submit">FINALIZAR COMPRA</button>
       </div>
 
       <!-- Product #1 -->
@@ -53,7 +53,7 @@
           </div>
 
           <div class="description">
-            <span th:text="${instance.key.getNome()}"></span>
+            <span id="getNome" th:text="${instance.key.getNome()}"></span>
             <span th:text="${instance.key.getCategoria()}"></span>
             <span th:text="${instance.key.getDescricao()}"></span>
           </div>
@@ -76,6 +76,14 @@
 
 
     <script type="text/javascript">
+
+
+
+      if(document.getElementById("getNome") == null){
+        document.getElementById("finalizar").disabled = true;
+      }
+
+
       $('.minus-btn').on('click', function(e) {
     		e.preventDefault();
     		var $this = $(this);
