@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @SpringBootApplication()
-public class BluefoodApplication {
+public class JavaFoodApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BluefoodApplication.class, args);
+        SpringApplication.run(JavaFoodApplication.class, args);
     }
 
 }
