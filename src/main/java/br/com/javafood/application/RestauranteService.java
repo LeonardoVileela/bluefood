@@ -138,7 +138,6 @@ public class RestauranteService {
         return restauranteRepository.findById(id).orElseThrow();
     }
 
-
     public List<Pedido> findPedidos(Integer id){
         return pedidoItemCardapioRepository.findPedidos(id);
     }
@@ -155,16 +154,16 @@ public class RestauranteService {
         return pedidoItemCardapioRepository.findItemsPedidosRestaurante(restauranteId,pedidoId);
     }
 
-    public List<ItemCardapio> listItemsRestaurante(Integer restauranteIdId){
-        return itemCardapioRepository.listItems(restauranteIdId);
+    public List<ItemCardapio> listItemsRestaurante(Integer restauranteId){
+        return itemCardapioRepository.listItems(restauranteId);
     }
 
     public List<ItemCardapio> listItemsRestauranteDesativados(Integer restauranteIdId){
         return itemCardapioRepository.listItemsDesativados(restauranteIdId);
     }
 
-    public List<Pedido> listPedidosRestaurante(Integer restauranteIdId){
-        return pedidoItemCardapioRepository.listPedidosItems(restauranteIdId);
+    public List<Pedido> listPedidosRestaurante(Integer restauranteId){
+        return pedidoItemCardapioRepository.listPedidosItems(restauranteId);
     }
 
     @Transactional

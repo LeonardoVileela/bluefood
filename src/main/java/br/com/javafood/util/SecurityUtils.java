@@ -89,7 +89,7 @@ public class SecurityUtils {
     private static Base64 base64 = new Base64(true);
 
     //encrypt using blowfish algorithm
-    public static String encrypt(String Data)throws Exception{
+    public static String encrypt(String Data) throws Exception{
 
         SecretKeySpec key = new SecretKeySpec(strkey.getBytes("UTF8"), "Blowfish");
         Cipher cipher = Cipher.getInstance("Blowfish");

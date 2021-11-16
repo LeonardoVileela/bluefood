@@ -188,7 +188,7 @@ public class RestauranteController {
 
         restauranteService.ativarItemCardapioService(id);
 
-        return "redirect:/restaurante/items/list";
+        return "redirect:/restaurante/itemcardapio/desativar";
     }
 
     @GetMapping(path = "/itemcardapio/edit")

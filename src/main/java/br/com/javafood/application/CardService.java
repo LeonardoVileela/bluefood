@@ -2,6 +2,7 @@ package br.com.javafood.application;
 
 import br.com.javafood.domain.card.Card;
 import br.com.javafood.domain.card.CardRepository;
+import br.com.javafood.domain.cliente.ClienteRepository;
 import br.com.javafood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ public class CardService {
 
     @Autowired
     private CardRepository cardRepository;
-
 
     @Transactional
     public void save(Card card){
@@ -39,7 +39,6 @@ public class CardService {
             card.setId(card1.getId());
         }
         cardRepository.save(card);
-
 
     }
 }

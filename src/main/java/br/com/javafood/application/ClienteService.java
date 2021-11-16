@@ -25,7 +25,7 @@ public class ClienteService {
            throw new ValidationException("O e-mail está duplicado");
        }
 
-       //se cliente for uma edição ele vai buscar pelo id pegar a senha do banco e colocar
+       // se cliente for uma edição ele vai buscar pelo id pegar a senha do banco e colocar
         //se for criação ele faz a criptografia da senha
        if (cliente.getEmail() == null){
            //orElseThrow retorna o cliente, se não retornar nada ele lança uma exeption
