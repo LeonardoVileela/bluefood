@@ -241,6 +241,77 @@ public class ClienteController {
 
     }
 
+
+    //inicio
+
+    @PostMapping(path = "/card/remove/{id}")
+    public String removeCard(@PathVariable Integer id){
+        System.out.println(id);
+        cardService.delete(id);
+
+        return "redirect:/cliente/home";
+    }
+
+
+
+    @GetMapping(path = "/card/edit")
+    public String cardEdit(
+            Model model
+    ) {
+        return "card-edit";
+    }
+
+    @PostMapping(path = "/card/save")
+    public String Card(
+            Card card
+    ) {
+        if (card.getNumber() != null) {
+            cardService.save(card);
+        }
+
+        return "redirect:/cliente/manageCards";
+    }
+
+    @GetMapping(path = "/cadaster/card")
+    public String cadasterCard(
+            Model model
+    ) {
+        return "card-edit";
+    }
+
+
+
+
+    @GetMapping(path = "/manageCards")
+    public String manageCards(
+            Model model
+    ) {
+        Card card = cardRepository.findByClienteId(SecurityUtils.loggedCliente().getId());
+        if (card == null) {
+            return "redirect:/cliente/cadaster/card";
+        }
+
+
+        try {
+            String number = SecurityUtils.decrypt(card.getNumber());
+            String newNumber = "**** **** **** " + number.substring(15);
+            String data = SecurityUtils.decrypt(card.getData());
+            Integer cardId =  card.getId();
+            System.out.println(cardId);
+            model.addAttribute("idcard", cardId.intValue());
+            model.addAttribute("bandeira", card.getBandeira().toUpperCase());
+            model.addAttribute("number", newNumber);
+            model.addAttribute("data", data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "cards-menage";
+
+    }
+
+    //final
+
     @GetMapping(path = "/pedidos")
     public String pedidos(
             Model model,

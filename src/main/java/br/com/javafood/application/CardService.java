@@ -41,4 +41,9 @@ public class CardService {
         cardRepository.save(card);
 
     }
+
+    @Transactional
+    public void delete(Integer id) {
+        cardRepository.deleteById(id);
+    }
 }
