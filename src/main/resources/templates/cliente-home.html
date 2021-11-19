@@ -33,6 +33,9 @@
 					<a style="cursor: pointer" class="nav-link" th:onclick="'location.href=\'' + @{/cliente/pedidos} + '?pendente=true'+ '\';'" >MEUS PEDIDOS</a>
 				</li>
 				<li class="nav-item">
+					<a style="cursor: pointer" class="nav-link" th:onclick="'location.href=\'' + @{/cliente/manageCards} + '\';'" >CARTÃO</a>
+				</li>
+				<li class="nav-item">
 					<a style="cursor: pointer" class="nav-link" th:onclick="'location.href=\'' + @{/logout} + '?pendente=true' + '\';'" >SAIR</a>
 				</li>
 			</ul>
